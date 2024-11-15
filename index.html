@@ -3,110 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Restaurant Reservation</title>
+    <title>Your Restaurant Name</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1>Hello<!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Your Restaurant Name</title>
-        <link rel="stylesheet" href="styles.css">
-    </head>
-    <body>
-        <!-- Navigation Menu -->
-        <nav>
-            <div class="logo">
-                <h1>Your Restaurant Name</h1>
-            </div>
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#menu">Menu</a></li>
-                <li><a href="#reservations">Reservations</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-    <section id="menu">
-        <h2>Our Menu</h2>
-        <div class="menu-category">
-            <h3>Appetizers</h3>
-            <div class="menu-item">
-                <h4>Dish Name</h4>
-                <p class="description">Description of the dish</p>
-                <span class="price">$XX.XX</span>
-            </div>
-            <!-- More menu items -->
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">
+            <h1>Your Restaurant</h1>
         </div>
-    </section>
-    <form id="reservation-form">
-        <!-- Add special requests textarea -->
-        <textarea placeholder="Special requests or dietary requirements"></textarea>
-        
-        <!-- Add preferred seating -->
-        <select name="seating" required>
-            <option value="">Preferred Seating</option>
-            <option value="indoor">Indoor</option>
-            <option value="outdoor">Outdoor</option>
-        </select>
-    </form>
-    
-        <!-- Hero Section -->
-        <header id="home">
-            <div class="hero">
-                <h1>Welcome to Your Restaurant</h1>
-                <p>Experience fine dining at its best</p>
-                <a href="#reservations" class="cta-button">Book a Table</a>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="menu.html">Menu</a></li>
+            <li><a href="reservations.html">Reservations</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Welcome to Gastronomy</h1>
+            <p>Experience the art of fine dining</p>
+            <div class="hero-buttons">
+                <a href="menu.html" class="cta-button">View Menu</a>
+                <a href="reservations.html" class="cta-button secondary">Book a Table</a>
             </div>
-        </header>
+        </div>
+        <div class="hero-overlay"></div>
+    </header>
+
+    <!-- Rest of your content -->
     
-        <!-- Main Content Sections -->
-        <main>
-            <!-- Menu Section -->
-            <section id="menu">
-                <h2>Our Menu</h2>
-                <!-- Menu items will go here -->
-            </section>
+    <script src="script.js"></script>
+</body>
+</html>
+
     
-            <!-- Reservations Section -->
-            <section id="reservations">
-                <h2>Make a Reservation</h2>
-                <form id="reservation-form">
-                    <input type="text" placeholder="Full Name" required>
-                    <input type="email" placeholder="Email" required>
-                    <input type="tel" placeholder="Phone Number" required>
-                    <input type="date" required>
-                    <input type="time" required>
-                    <input type="number" placeholder="Number of Guests" min="1" required>
-                    <button type="submit">Book Now</button>
-                </form>
-            </section>
-    
-            <!-- About Section -->
-            <section id="about">
-                <h2>About Us</h2>
-                <p>Your restaurant's story goes here...</p>
-            </section>
-    
-            <!-- Contact Section -->
-            <section id="contact">
-                <h2>Contact Us</h2>
-                <div cla<script src="script.js"></script>
-                ss="contact-info">
-                    <p>Address: Your Restaurant Address</p>
-                    <p>Phone: Your Phone Number</p>
-                    <p>Email: your@email.com</p>
-                </div>
-            </section>
-        </main>
-    
-        <!-- Footer -->
-        <footer>
-            <p>&copy; 2024 Your Restaurant Name. All rights reserved.</p>
-        </footer>
-    </body>
-    </html>
-    </h1>
+
+    <main>
+        <!-- About Section -->
+        <section id="about">
+            <h2>About Us</h2>
+            <p>Your restaurant's story goes here...</p>
+        </section>
+
+        <!-- Restaurants Section -->
+        <section id="restaurants">
+            <h2>Our Locations</h2>
+            <div class="restaurants-container">
+                <!-- Restaurant cards here -->
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact">
+            <h2>Contact Us</h2>
+            <div class="contact-info">
+                <p>Address: Your Restaurant Address</p>
+                <p>Phone: Your Phone Number</p>
+                <p>Email: your@email.com</p>
+            </div>
+        </section>
+
+        <!-- Newsletter Section -->
+        <section id="newsletter">
+            <h2>Subscribe to Our Newsletter</h2>
+            <p>Stay updated with our latest offers and events!</p>
+            <form id="newsletter-form">
+                <input type="email" placeholder="Enter your email" required>
+                <button type="submit">Subscribe</button>
+            </form>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div id="map" style="height: 400px; width: 100%;"></div>
+        <p>&copy; 2024 Your Restaurant Name. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>

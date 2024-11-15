@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservations - Your Restaurant Name</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation Menu (same as index.html) -->
+    <nav>
+        <div class="logo">
+            <h1>Your Restaurant Name</h1>
+        </div>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="menu.html">Menu</a></li>
+            <li><a href="reservations.html">Reservations</a></li>
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <!-- Reservations Section -->
+        <section id="reservations" class="page-section">
+            <h2>Make a Reservation</h2>
+            <form id="reservation-form">
+                <input type="text" placeholder="Full Name" required>
+                <input type="email" placeholder="Email" required>
+                <input type="tel" placeholder="Phone Number" required>
+                <select name="location" required>
+                    <option value="">Select Location</option>
+                    <option value="downtown">Downtown Location</option>
+                    <option value="uptown">Uptown Location</option>
+                    <option value="riverside">Riverside Location</option>
+                </select>
+                <input type="date" required>
+                <input type="time" required>
+                <input type="number" placeholder="Number of Guests" min="1" required>
+                <select name="seating" required>
+                    <option value="">Preferred Seating</option>
+                    <option value="indoor">Indoor</option>
+                    <option value="outdoor">Outdoor</option>
+                </select>
+                <textarea placeholder="Special requests or dietary requirements"></textarea>
+                <button type="submit">Book Now</button>
+            </form>
+        </section>
+    </main>
+
+    <!-- Footer (same as index.html) -->
+    <footer>
+        <p>&copy; 2024 Your Restaurant Name. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="reservations.js"></script>
+    
+</body>
+</html>

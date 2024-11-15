@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu - Your Restaurant Name</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">
+            <h1>Your Restaurant</h1>
+        </div>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="menu.html">Menu</a></li>
+            <li><a href="reservations.html">Reservations</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Menu Section -->
+    <section class="menu" id="menu">
+        <div class="container">
+            <h2>Our Menu</h2>
+            
+            <!-- Menu Filters -->
+            <div class="menu-filters">
+                <button class="active" data-filter="all">All</button>
+                <button data-filter="starters">Starters</button>
+                <button data-filter="main">Main Course</button>
+                <button data-filter="desserts">Desserts</button>
+                <button data-filter="drinks">Drinks</button>
+            </div>
+
+            <!-- Menu Items Grid -->
+            <div class="menu-items">
+                <!-- Starters -->
+                <div class="menu-item" data-category="starters">
+                    <img src="images/menu/bruschetta.jpg" alt="Bruschetta">
+                    <div class="menu-item-content">
+                        <h4>Bruschetta</h4>
+                        <p>Toasted bread with tomatoes, garlic, and fresh basil</p>
+                        <span class="price">$8.99</span>
+                    </div>
+                </div>
+
+                <!-- Main Course -->
+                <div class="menu-item" data-category="main">
+                    <img src="images/menu/pasta.jpg" alt="Pasta">
+                    <div class="menu-item-content">
+                        <h4>Fettuccine Alfredo</h4>
+                        <p>Creamy pasta with parmesan cheese and butter sauce</p>
+                        <span class="price">$16.99</span>
+                    </div>
+                </div>
+
+                <!-- Dessert -->
+                <div class="menu-item" data-category="desserts">
+                    <img src="images/menu/tiramisu.jpg" alt="Tiramisu">
+                    <div class="menu-item-content">
+                        <h4>Tiramisu</h4>
+                        <p>Classic Italian dessert with coffee and mascarpone</p>
+                        <span class="price">$7.99</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="menu.js"></script>
+</body>
+</html>
