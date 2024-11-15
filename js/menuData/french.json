@@ -1,0 +1,62 @@
+{
+  "restaurant": "French Restaurant",
+  "categories": {
+    "appetizers": [
+      {
+        "id": "fr-app-1",
+        "name": "French Onion Soup",
+        "description": "Classic onion soup with gruyère cheese and crusty bread",
+        "price": 9.95,
+        "image": "onionsoup.jpg"
+      },
+      {
+        "id": "fr-app-2",
+        "name": "Escargots",
+        "description": "Burgundy snails in garlic-herb butter",
+        "price": 12.95,
+        "image": "escargots.jpg"
+      }
+    ],
+    "mainCourses": [
+      {
+        "id": "fr-main-1",
+        "name": "Coq au Vin",
+        "description": "Braised chicken in red wine with mushrooms and pearl onions",
+        "price": 24.95,
+        "image": "coqauvin.jpg"
+      },
+      {
+        "id": "fr-main-2",
+        "name": "Beef Bourguignon",
+        "description": "Classic beef stew in red wine sauce",
+        "price": 26.95,
+        "image": "bourguignon.jpg"
+      }
+    ],
+    "desserts": [
+      {
+        "id": "fr-des-1",
+        "name": "Crème Brûlée",
+        "description": "Classic vanilla custard with caramelized sugar top",
+        "price": 8.95,
+        "image": "cremebrulee.jpg"
+      },
+      {
+        "id": "fr-des-2",
+        "name": "Tarte Tatin",
+        "description": "Upside-down caramelized apple tart",
+        "price": 9.95,
+        "image": "tartetatin.jpg"
+      }
+    ],
+    "beverages": [
+      {
+        "id": "fr-bev-1",
+        "name": "French Wine",
+        "description": "Selection of regional French wines",
+        "price": 8.95,
+        "image": "frenchwine.jpg"
+      }
+    ]
+  }
+}
