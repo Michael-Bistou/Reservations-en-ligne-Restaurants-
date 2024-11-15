@@ -3,60 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reservations - Your Restaurant Name</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Reservations - Your Restaurant</title>
+    <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Navigation Menu (same as index.html) -->
+    <!-- Navigation -->
     <nav>
         <div class="logo">
-            <h1>Your Restaurant Name</h1>
+            <h1>Your Restaurant</h1>
         </div>
         <ul>
             <li><a href="index.html">Home</a></li>
             <li><a href="menu.html">Menu</a></li>
             <li><a href="reservations.html">Reservations</a></li>
-            <li><a href="index.html#about">About</a></li>
-            <li><a href="index.html#contact">Contact</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
         </ul>
     </nav>
 
-    <main>
-        <!-- Reservations Section -->
-        <section id="reservations" class="page-section">
+    <!-- Reservation Section -->
+    <section class="reservation">
+        <div class="container">
             <h2>Make a Reservation</h2>
-            <form id="reservation-form">
-                <input type="text" placeholder="Full Name" required>
-                <input type="email" placeholder="Email" required>
-                <input type="tel" placeholder="Phone Number" required>
-                <select name="location" required>
-                    <option value="">Select Location</option>
-                    <option value="downtown">Downtown Location</option>
-                    <option value="uptown">Uptown Location</option>
-                    <option value="riverside">Riverside Location</option>
-                </select>
-                <input type="date" required>
-                <input type="time" required>
-                <input type="number" placeholder="Number of Guests" min="1" required>
-                <select name="seating" required>
-                    <option value="">Preferred Seating</option>
-                    <option value="indoor">Indoor</option>
-                    <option value="outdoor">Outdoor</option>
-                </select>
-                <textarea placeholder="Special requests or dietary requirements"></textarea>
-                <button type="submit">Book Now</button>
-            </form>
-        </section>
-    </main>
+            <div class="reservation-wrapper">
+                <form id="reservation-form">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
 
-    <!-- Footer (same as index.html) -->
-    <footer>
-        <p>&copy; 2024 Your Restaurant Name. All rights reserved.</p>
-    </footer>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
 
-    <script src="script.js"></script>
+                    <div class="form-group">
+                        <label for="phone">Phone</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="date">Date</label>
+                            <input type="date" id="date" name="date" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="time">Time</label>
+                            <input type="time" id="time" name="time" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="guests">Number of Guests</label>
+                        <select id="guests" name="guests" required>
+                            <option value="">Select number of guests</option>
+                            <option value="1">1 Person</option>
+                            <option value="2">2 People</option>
+                            <option value="3">3 People</option>
+                            <option value="4">4 People</option>
+                            <option value="5">5 People</option>
+                            <option value="6">6 People</option>
+                            <option value="7+">7+ People</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="special-requests">Special Requests</label>
+                        <textarea id="special-requests" name="special-requests" rows="4"></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Make Reservation</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
     <script src="reservations.js"></script>
-    
 </body>
 </html>
