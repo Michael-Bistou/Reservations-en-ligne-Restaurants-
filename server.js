@@ -387,6 +387,9 @@ app.get('/payment-status/:paymentIntentId', async (req, res) => {
         });
     }
 });
+
+
+
 // Create Reservation endpoint
 app.post('/create-reservation', async (req, res) => {
     try {

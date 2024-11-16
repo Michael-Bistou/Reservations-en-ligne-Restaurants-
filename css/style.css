@@ -1090,3 +1090,175 @@ select.invalid {
 .button:hover {
     background-color: #085494;
 }
+/* Confirmation Page Styles */
+.confirmation-page {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.confirmation-container {
+    max-width: 600px;
+    width: 100%;
+    padding: 2rem;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.loading-spinner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.loading-spinner i {
+    font-size: 3rem;
+    color: #0a6ebd;
+}
+
+.success-icon {
+    font-size: 4rem;
+    color: #28a745;
+    margin-bottom: 1rem;
+}
+
+.error-icon {
+    font-size: 4rem;
+    color: #dc3545;
+    margin-bottom: 1rem;
+}
+
+.confirmation-content h1 {
+    color: #28a745;
+    margin-bottom: 2rem;
+}
+
+.error-content h1 {
+    color: #dc3545;
+    margin-bottom: 2rem;
+}
+
+.reservation-details {
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    text-align: left;
+}
+
+.reservation-details p {
+    margin: 0.5rem 0;
+    font-size: 1.1rem;
+}
+
+.next-steps {
+    margin: 2rem 0;
+    text-align: left;
+}
+
+.next-steps h2 {
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+.next-steps ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.next-steps li {
+    margin: 0.5rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.next-steps li:before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: #28a745;
+}
+
+.buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.button {
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.button:first-child {
+    background-color: #0a6ebd;
+    color: white;
+}
+
+.button:last-child {
+    background-color: #6c757d;
+    color: white;
+}
+
+.button:hover {
+    opacity: 0.9;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+    .confirmation-container {
+        margin: 1rem;
+        padding: 1.5rem;
+    }
+
+    .buttons {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .button {
+        width: 100%;
+    }
+
+    .reservation-details {
+        padding: 1rem;
+    }
+
+    .success-icon,
+    .error-icon {
+        font-size: 3rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .confirmation-page {
+        padding: 1rem;
+    }
+
+    .confirmation-container {
+        padding: 1rem;
+    }
+
+    .next-steps h2 {
+        font-size: 1.2rem;
+    }
+
+    .reservation-details p {
+        font-size: 1rem;
+    }
+}
