@@ -3,189 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Menus - Restaurant Group</title>
-    <link rel="stylesheet" href="css/style.css">
+    <title>Restaurant Menu</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <header>
-        <nav>
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/menu" class="active">Menu</a></li>
-                <li><a href="/about">About</a></li>
-                <li><a href="/contact">Contact</a></li>
-                <li><a href="/reservations">Reservations</a></li>
+        <nav class="navbar">
+            <div class="logo">
+                <h1>RestaurantGroup</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#restaurants">Restaurants</a></li>
+                <li><a href="reservations.html">Reservations</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
             </ul>
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
         </nav>
     </header>
 
-    <main>
-        <div class="dietary-legend">
-            <span class="dietary-item"><i class="fas fa-leaf"></i> Vegetarian</span>
-            <span class="dietary-item"><i class="fas fa-seedling"></i> Vegan</span>
-            <span class="dietary-item"><i class="fas fa-pepper-hot"></i> Spicy</span>
-            <span class="dietary-item"><i class="fas fa-wheat-awn-circle-exclamation"></i> Gluten-Free</span>
+    <main class="menu-page">
+        <div class="menu-header">
+            <h1 id="restaurant-name">Restaurant Menu</h1>
+            <div class="menu-filters">
+                <button class="filter-btn active" data-category="all">All</button>
+                <button class="filter-btn" data-category="starters">Starters</button>
+                <button class="filter-btn" data-category="main">Main Course</button>
+                <button class="filter-btn" data-category="desserts">Desserts</button>
+                <button class="filter-btn" data-category="drinks">Drinks</button>
+            </div>
         </div>
 
-        <div class="menu-container">
-            <!-- Italian Restaurant -->
-            <div class="restaurant-menu italian">
-                <div class="restaurant-header">
-                    <h2><i class="fas fa-pizza-slice"></i> La Bella Italia</h2>
-                    <p>Authentic Italian Cuisine</p>
-                    <a href="/reservations?restaurant=italian" class="reservation-btn">
-                        <i class="fas fa-calendar-alt"></i> Reserve a Table
-                    </a>
-                </div>
-
-                <div class="menu-category">
-                    <h3><i class="fas fa-cheese"></i> Antipasti</h3>
-                    <div class="menu-items">
-                        <div class="menu-item">
-                            <div class="item-header">
-                                <h4>Bruschetta <i class="fas fa-leaf" title="Vegetarian"></i></h4>
-                                <span class="price">€8</span>
-                            </div>
-                            <p>Fresh tomatoes, basil, and garlic on toasted bread</p>
-                        </div>
-                        <div class="menu-item">
-                            <div class="item-header">
-                                <h4>Caprese <i class="fas fa-leaf" title="Vegetarian"></i></h4>
-                                <span class="price">€10</span>
-                            </div>
-                            <p>Fresh mozzarella, tomatoes, and basil with balsamic glaze</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="menu-category">
-                    <h3><i class="fas fa-utensils"></i> Pasta</h3>
-                    <div class="menu-items">
-                        <div class="menu-item">
-                            <div class="item-header">
-                                <h4>Spaghetti Carbonara</h4>
-                                <span class="price">€15</span>
-                            </div>
-                            <p>Classic pasta with eggs, pecorino, and guanciale</p>
-                        </div>
-                        <div class="menu-item">
-                            <div class="item-header">
-                                <h4>Penne Arrabbiata <i class="fas fa-pepper-hot" title="Spicy"></i></h4>
-                                <span class="price">€13</span>
-                            </div>
-                            <p>Spicy tomato sauce with garlic and chili</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- French Restaurant -->
-            <div class="restaurant-menu french">
-                <div class="restaurant-header">
-                    <h2><i class="fas fa-wine-glass-alt"></i> Le Petit Bistro</h2>
-                    <p>Classic French Cuisine</p>
-                    <a href="/reservations?restaurant=french" class="reservation-btn">
-                        <i class="fas fa-calendar-alt"></i> Reserve a Table
-                    </a>
-                </div>
-
-                <div class="menu-category">
-                    <h3><i class="fas fa-concierge-bell"></i> Entrées</h3>
-                    <div class="menu-items">
-                        <div class="menu-item">
-                            <div class="item-header">
-                                <h4>Soupe à l'Oignon <i class="fas fa-leaf" title="Vegetarian"></i></h4>
-                                <span class="price">€9</span>
-                            </div>
-                            <p>Classic French onion soup with gruyère and croutons</p>
-                        </div>
-                        <div class="menu-item">
-                            <div class="item-header">
-                                <h4>Escargots de Bourgogne</h4>
-                                <span class="price">€12</span>
-                            </div>
-                            <p>Burgundy snails in garlic herb butter</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="menu-category">
-                    <h3><i class="fas fa-utensils"></i> Plats Principaux</h3>
-                    <div class="menu-items">
-                        <div class="menu-item">
-                            <div class="item-header">
-                                <h4>Coq au Vin</h4>
-                                <span class="price">€24</span>
-                            </div>
-                            <p>Braised chicken in red wine sauce with mushrooms</p>
-                        </div>
-                        <div class="menu-item">
-                            <div class="item-header">
-                                <h4>Ratatouille <i class="fas fa-seedling" title="Vegan"></i></h4>
-                                <span class="price">€18</span>
-                            </div>
-                            <p>Provençal vegetable stew with herbs de Provence</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Asian Restaurant -->
-            <div class="restaurant-menu asian">
-                <div class="restaurant-header">
-                    <h2><i class="fas fa-chopsticks-noodles"></i> Asian Fusion</h2>
-                    <p>Modern Asian Cuisine</p>
-                    <a href="/reservations?restaurant=asian" class="reservation-btn">
-                        <i class="fas fa-calendar-alt"></i> Reserve a Table
-                    </a>
-                </div>
-
-                <div class="menu-category">
-                    <h3><i class="fas fa-drumstick-bite"></i> Starters</h3>
-                    <div class="menu-items">
-                        <div class="menu-item">
-                            <div class="item-header">
-                                <h4>Spring Rolls <i class="fas fa-seedling" title="Vegan"></i></h4>
-                                <span class="price">€7</span>
-                            </div>
-                            <p>Fresh vegetables in rice paper with peanut sauce</p>
-                        </div>
-                        <div class="menu-item">
-                            <div class="item-header">
-                                <h4>Edamame <i class="fas fa-seedling" title="Vegan"></i></h4>
-                                <span class="price">€6</span>
-                            </div>
-                            <p>Steamed soybeans with sea salt</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="menu-category">
-                    <h3><i class="fas fa-bowl-food"></i> Main Courses</h3>
-                    <div class="menu-items">
-                        <div class="menu-item">
-                            <div class="item-header">
-                                <h4>Pad Thai <i class="fas fa-wheat-awn-circle-exclamation" title="Gluten-Free"></i></h4>
-                                <span class="price">€16</span>
-                            </div>
-                            <p>Rice noodles with tamarind sauce, peanuts, and lime</p>
-                        </div>
-                        <div class="menu-item">
-                            <div class="item-header">
-                                <h4>Kung Pao Chicken <i class="fas fa-pepper-hot" title="Spicy"></i></h4>
-                                <span class="price">€18</span>
-                            </div>
-                            <p>Spicy diced chicken with peanuts and vegetables</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="menu-container" id="menu-items">
+            <!-- Menu items will be dynamically inserted here -->
         </div>
     </main>
 
     <footer>
-        <p>&copy; 2024 Restaurant Group. All rights reserved.</p>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-phone"></i> +1 234 567 890</p>
+                    <p><i class="fas fa-envelope"></i> info@restaurantgroup.com</p>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Restaurant Street, City</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Follow Us</h3>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 RestaurantGroup. All rights reserved.</p>
+            </div>
+        </div>
     </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="js/menu.js"></script>
 </body>
 </html>

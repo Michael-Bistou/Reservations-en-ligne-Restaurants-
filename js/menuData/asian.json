@@ -1,69 +1,26 @@
 {
-  "restaurant": "Asian Restaurant",
-  "categories": {
-    "appetizers": [
-      {
-        "id": "as-app-1",
-        "name": "Spring Rolls",
-        "description": "Fresh vegetables and herbs wrapped in rice paper",
-        "price": 7.95,
-        "image": "springrolls.jpg"
-      },
-      {
-        "id": "as-app-2",
-        "name": "Gyoza",
-        "description": "Pan-fried dumplings with pork and vegetables",
-        "price": 8.95,
-        "image": "gyoza.jpg"
-      }
-    ],
-    "mainCourses": [
-      {
-        "id": "as-main-1",
-        "name": "Pad Thai",
-        "description": "Stir-fried rice noodles with tofu, shrimp, peanuts, and tamarind sauce",
-        "price": 16.95,
-        "image": "padthai.jpg"
-      },
-      {
-        "id": "as-main-2",
-        "name": "Beef Teriyaki",
-        "description": "Grilled beef with teriyaki sauce and steamed rice",
-        "price": 18.95,
-        "image": "teriyaki.jpg"
-      }
-    ],
-    "desserts": [
-      {
-        "id": "as-des-1",
-        "name": "Mango Sticky Rice",
-        "description": "Sweet sticky rice with fresh mango and coconut cream",
-        "price": 7.95,
-        "image": "mangorice.jpg"
-      },
-      {
-        "id": "as-des-2",
-        "name": "Green Tea Ice Cream",
-        "description": "Traditional matcha ice cream",
-        "price": 6.95,
-        "image": "matchaicecream.jpg"
-      }
-    ],
-    "beverages": [
-      {
-        "id": "as-bev-1",
-        "name": "Green Tea",
-        "description": "Traditional Japanese green tea",
-        "price": 3.95,
-        "image": "greentea.jpg"
-      },
-      {
-        "id": "as-bev-2",
-        "name": "Thai Iced Tea",
-        "description": "Sweet and creamy Thai tea with milk",
-        "price": 4.95,
-        "image": "thaitea.jpg"
-      }
+    "name": "Asian Fusion",
+    "items": [
+        {
+            "name": "Spring Rolls",
+            "category": "starters",
+            "price": "7.99",
+            "description": "Fresh vegetable spring rolls",
+            "image": "/images/menu/bruschetta.jpg"
+        },
+        {
+            "name": "Salmon Teriyaki",
+            "category": "main",
+            "price": "22.99",
+            "description": "Grilled salmon with teriyaki sauce",
+            "image": "/images/menu/salmon.jpg"
+        },
+        {
+            "name": "Green Tea Ice Cream",
+            "category": "desserts",
+            "price": "6.99",
+            "description": "Homemade green tea ice cream",
+            "image": "/images/menu/tiramisu.jpg"
+        }
     ]
-  }
 }

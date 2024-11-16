@@ -1,140 +1,164 @@
-document.addEventListener('DOMContentLoaded', async function() {
-    try {
-        // Fetch restaurants data
-        const response = await fetch('/api/restaurants');
-        const result = await response.json();
-        const restaurants = result.data;
-        
-        initReservationForm(restaurants);
-        initPaymentHandling();
-    } catch (error) {
-        console.error('Error initializing reservation system:', error);
-        showError('Failed to load reservation system');
-    }
-});
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize AOS
+    AOS.init({
+        duration: 800,
+        offset: 100,
+        once: true
+    });
 
-function initReservationForm(restaurants) {
+    // Initialize Flatpickr for date picker
+    flatpickr("#date", {
+        minDate: "today",
+        dateFormat: "Y-m-d",
+        disable: [
+            function(date) {
+                // Disable Sundays and Mondays
+                return (date.getDay() === 0 || date.getDay() === 1);
+            }
+        ]
+    });
+
+    // Initialize Flatpickr for time picker
+    flatpickr("#time", {
+        enableTime: true,
+        noCalendar: true,
+        dateFormat: "H:i",
+        minTime: "11:30",
+        maxTime: "21:30",
+        defaultHour: 19,
+        defaultMinute: 0
+    });
+
+    // Get URL parameters
+    const params = new URLSearchParams(window.location.search);
+    const preselectedRestaurant = params.get('restaurant');
+    
+    if (preselectedRestaurant) {
+        document.getElementById('restaurant').value = preselectedRestaurant;
+    }
+
+    // Form validation and submission
     const form = document.getElementById('reservation-form');
-    if (!form) return;
+    const modal = document.getElementById('confirmation-modal');
+    const closeModal = document.querySelector('.close-modal');
+    const modalBtn = document.querySelector('.modal-btn');
 
-    // Populate restaurant select
-    const restaurantSelect = form.querySelector('#restaurant');
-    if (restaurantSelect) {
-        Object.entries(restaurants).forEach(([key, restaurant]) => {
-            const option = document.createElement('option');
-            option.value = key;
-            option.textContent = restaurant.name;
-            restaurantSelect.appendChild(option);
-        });
-    }
-
-    form.addEventListener('submit', async function(e) {
+    form.addEventListener('submit', function(e) {
         e.preventDefault();
-        
+
+        // Get form data
         const formData = {
-            restaurant: form.restaurant.value,
-            name: form.name.value,
-            email: form.email.value,
-            date: form.date.value,
-            time: form.time.value,
-            guests: parseInt(form.guests.value),
-            paymentMethod: form.querySelector('input[name="payment-method"]:checked').value,
-            specialRequests: form.specialRequests?.value
+            restaurant: this.restaurant.value,
+            date: this.date.value,
+            time: this.time.value,
+            guests: this.guests.value,
+            seating: this.seating.value,
+            name: this.name.value,
+            email: this.email.value,
+            phone: this.phone.value,
+            specialRequests: this['special-requests'].value
         };
 
-        if (formData.paymentMethod === 'pay-now') {
-            formData.paymentDetails = {
-                cardHolder: form.cardHolder?.value,
-                cardNumber: form.cardNumber?.value,
-                expiryDate: form.expiryDate?.value,
-                cvv: form.cvv?.value
-            };
+        // Validate form data
+        if (!validateForm(formData)) {
+            return;
         }
 
-        try {
-            showLoading();
-            const response = await fetch('/api/reservations', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(formData)
-            });
+        // Show confirmation
+        showConfirmation(formData);
+    });
 
-            const result = await response.json();
-            
-            if (!response.ok) {
-                throw new Error(result.message);
-            }
+    function validateForm(data) {
+        // Reset previous errors
+        clearErrors();
 
-            hideLoading();
-            showConfirmation(result.data);
-            form.reset();
-        } catch (error) {
-            hideLoading();
-            showError('Failed to process reservation: ' + error.message);
+        let isValid = true;
+
+        // Email validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(data.email)) {
+            showError('email', 'Please enter a valid email address');
+            isValid = false;
+        }
+
+        // Phone validation
+        const phoneRegex = /^\+?[\d\s-]{10,}$/;
+        if (!phoneRegex.test(data.phone)) {
+            showError('phone', 'Please enter a valid phone number');
+            isValid = false;
+        }
+
+        // Name validation
+        if (data.name.length < 3) {
+            showError('name', 'Name must be at least 3 characters long');
+            isValid = false;
+        }
+
+        return isValid;
+    }
+
+    function showError(fieldId, message) {
+        const field = document.getElementById(fieldId);
+        field.classList.add('invalid');
+        
+        const error = document.createElement('div');
+        error.className = 'error';
+        error.textContent = message;
+        
+        field.parentNode.appendChild(error);
+    }
+
+    function clearErrors() {
+        document.querySelectorAll('.error').forEach(error => error.remove());
+        document.querySelectorAll('.invalid').forEach(field => field.classList.remove('invalid'));
+    }
+
+    function showConfirmation(data) {
+        const restaurantName = document.querySelector(`#restaurant option[value="${data.restaurant}"]`).textContent;
+        const details = document.getElementById('confirmation-details');
+        
+        details.innerHTML = `
+            <p><strong>Restaurant:</strong> ${restaurantName}</p>
+            <p><strong>Date:</strong> ${data.date}</p>
+            <p><strong>Time:</strong> ${data.time}</p>
+            <p><strong>Number of Guests:</strong> ${data.guests}</p>
+            <p><strong>Name:</strong> ${data.name}</p>
+            <p><strong>Email:</strong> ${data.email}</p>
+            <p><strong>Phone:</strong> ${data.phone}</p>
+            ${data.specialRequests ? `<p><strong>Special Requests:</strong> ${data.specialRequests}</p>` : ''}
+        `;
+
+        modal.classList.add('active');
+    }
+
+    // Modal close handlers
+    function closeConfirmation() {
+        modal.classList.remove('active');
+        form.reset();
+    }
+
+    closeModal.addEventListener('click', closeConfirmation);
+    modalBtn.addEventListener('click', closeConfirmation);
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            closeConfirmation();
         }
     });
-}
 
-function initPaymentHandling() {
-    const paymentMethodInputs = document.querySelectorAll('input[name="payment-method"]');
-    const onlinePaymentForm = document.getElementById('online-payment-form');
-
-    if (paymentMethodInputs && onlinePaymentForm) {
-        paymentMethodInputs.forEach(input => {
-            input.addEventListener('change', function() {
-                onlinePaymentForm.style.display = 
-                    this.value === 'pay-now' ? 'block' : 'none';
-            });
+    // Mobile menu handlers
+    const burger = document.querySelector('.burger');
+    const nav = document.querySelector('.nav-links');
+    
+    if (burger) {
+        burger.addEventListener('click', () => {
+            nav.classList.toggle('active');
         });
     }
-}
 
-function showConfirmation(reservationData) {
-    const confirmationDiv = document.createElement('div');
-    confirmationDiv.className = 'confirmation-message';
-    confirmationDiv.innerHTML = `
-        <h3>Reservation Confirmed!</h3>
-        <p>Thank you, ${reservationData.name}!</p>
-        <p>Your reservation details:</p>
-        <ul>
-            <li>Date: ${reservationData.date}</li>
-            <li>Time: ${reservationData.time}</li>
-            <li>Guests: ${reservationData.guests}</li>
-            <li>Restaurant: ${reservationData.restaurant}</li>
-        </ul>
-        <p>A confirmation email has been sent to ${reservationData.email}</p>
-    `;
-    document.body.appendChild(confirmationDiv);
-
-    // Remove confirmation after 5 seconds
-    setTimeout(() => {
-        confirmationDiv.remove();
-    }, 5000);
-}
-
-function showLoading() {
-    const loader = document.createElement('div');
-    loader.className = 'loader';
-    document.body.appendChild(loader);
-}
-
-function hideLoading() {
-    const loader = document.querySelector('.loader');
-    if (loader) {
-        loader.remove();
-    }
-}
-
-function showError(message) {
-    const errorDiv = document.createElement('div');
-    errorDiv.className = 'error-message';
-    errorDiv.textContent = message;
-    document.body.appendChild(errorDiv);
-
-    // Remove error after 5 seconds
-    setTimeout(() => {
-        errorDiv.remove();
-    }, 5000);
-}
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', function(e) {
+        if (nav.classList.contains('active') && !e.target.closest('.navbar')) {
+            nav.classList.remove('active');
+        }
+    });
+});

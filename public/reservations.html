@@ -3,67 +3,150 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Restaurant Reservations</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <title>Make a Reservation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Add Flatpickr for date/time picker -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <!-- Navigation -->
     <header>
-        <nav>
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/menu">Menu</a></li>
-                <li><a href="/about">About</a></li>
-                <li><a href="/contact">Contact</a></li>
-                <li><a href="/reservations" class="active">Reservations</a></li>
+        <nav class="navbar">
+            <div class="logo">
+                <h1>RestaurantGroup</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#restaurants">Restaurants</a></li>
+                <li><a href="reservations.html">Reservations</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
             </ul>
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
         </nav>
     </header>
 
-    <main>
-        <section class="reservations">
-            <div class="container">
-                <h2>Make a Reservation</h2>
-                <form id="reservation-form" class="reservation-form">
+    <main class="reservation-page">
+        <div class="reservation-header">
+            <h1>Make a Reservation</h1>
+            <p>Book your table at one of our exceptional restaurants</p>
+        </div>
+
+        <div class="reservation-container">
+            <form id="reservation-form" class="reservation-form">
+                <div class="form-group">
+                    <label for="restaurant">Select Restaurant</label>
+                    <select id="restaurant" name="restaurant" required>
+                        <option value="">Choose a restaurant</option>
+                        <option value="italian">La Bella Italia</option>
+                        <option value="french">Le Petit Bistro</option>
+                        <option value="asian">Asian Fusion</option>
+                    </select>
+                </div>
+
+                <div class="form-row">
                     <div class="form-group">
-                        <label for="restaurant-select">Select Restaurant</label>
-                        <select id="restaurant-select" name="restaurant" required>
-                            <option value="italian">La Bella Italia</option>
-                            <option value="french">Le Petit Bistro</option>
-                            <option value="asian">Asian Fusion</option>
+                        <label for="date">Date</label>
+                        <input type="text" id="date" name="date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="time">Time</label>
+                        <input type="text" id="time" name="time" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="guests">Number of Guests</label>
+                        <select id="guests" name="guests" required>
+                            <option value="">Select number of guests</option>
+                            <option value="1">1 Person</option>
+                            <option value="2">2 People</option>
+                            <option value="3">3 People</option>
+                            <option value="4">4 People</option>
+                            <option value="5">5 People</option>
+                            <option value="6">6 People</option>
+                            <option value="7+">7+ People</option>
                         </select>
                     </div>
-                    <!-- Rest of your form fields -->
-                    <!-- ... -->
-                </form>
+                    <div class="form-group">
+                        <label for="seating">Seating Preference</label>
+                        <select id="seating" name="seating">
+                            <option value="any">No Preference</option>
+                            <option value="indoor">Indoor</option>
+                            <option value="outdoor">Outdoor</option>
+                            <option value="bar">Bar</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="special-requests">Special Requests</label>
+                    <textarea id="special-requests" name="special-requests" rows="3"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="submit-btn">
+                        Make Reservation <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </form>
+
+            <div class="reservation-info">
+                <div class="info-card">
+                    <h3><i class="fas fa-clock"></i> Opening Hours</h3>
+                    <p>Monday - Friday: 11:30 AM - 10:00 PM</p>
+                    <p>Saturday - Sunday: 11:00 AM - 11:00 PM</p>
+                </div>
+                <div class="info-card">
+                    <h3><i class="fas fa-info-circle"></i> Reservation Policy</h3>
+                    <ul>
+                        <li>Please arrive 10 minutes before your reservation time</li>
+                        <li>We hold reservations for 15 minutes</li>
+                        <li>For groups larger than 6, please call us directly</li>
+                    </ul>
+                </div>
             </div>
-        </section>
+        </div>
     </main>
 
     <footer>
-        <div class="container">
-            <p>&copy; 2024 Restaurant Group. All rights reserved.</p>
-        </div>
+        <!-- Same footer as other pages -->
     </footer>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Get restaurant from URL parameters
-            const urlParams = new URLSearchParams(window.location.search);
-            const restaurant = urlParams.get('restaurant');
-            
-            // If restaurant parameter exists, select it in the dropdown
-            if (restaurant) {
-                const restaurantSelect = document.getElementById('restaurant-select');
-                if (restaurantSelect) {
-                    restaurantSelect.value = restaurant;
-                    // Trigger any necessary updates based on restaurant selection
-                    const event = new Event('change');
-                    restaurantSelect.dispatchEvent(event);
-                }
-            }
-        });
-    </script>
+    <div id="confirmation-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Reservation Confirmed!</h2>
+            <div id="confirmation-details"></div>
+            <button class="modal-btn">Close</button>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="js/reservations.js"></script>
 </body>
 </html>

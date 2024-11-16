@@ -1,40 +1,26 @@
 {
-    "starters": [
+    "name": "La Bella Italia",
+    "items": [
         {
             "name": "Bruschetta",
+            "category": "starters",
             "price": "8.99",
             "description": "Toasted bread with tomatoes, garlic, and fresh basil",
-            "image": "bruschetta.jpg"
+            "image": "/images/menu/bruschetta.jpg"
         },
         {
-            "name": "Caprese Salad",
-            "price": "10.99",
-            "description": "Fresh mozzarella, tomatoes, and basil with balsamic glaze",
-            "image": "caprese.jpg"
-        }
-    ],
-    "mains": [
-        {
-            "name": "Spaghetti Carbonara",
+            "name": "Pasta",
+            "category": "main",
             "price": "16.99",
-            "description": "Classic pasta with eggs, pecorino cheese, and guanciale",
-            "image": "carbonara.jpg"
-        }
-    ],
-    "desserts": [
+            "description": "Fresh homemade pasta with signature sauce",
+            "image": "/images/menu/pasta.jpg"
+        },
         {
             "name": "Tiramisu",
+            "category": "desserts",
             "price": "7.99",
             "description": "Classic Italian coffee-flavored dessert",
-            "image": "tiramisu.jpg"
-        }
-    ],
-    "drinks": [
-        {
-            "name": "Italian Red Wine",
-            "price": "6.99",
-            "description": "Glass of house red wine",
-            "image": "red-wine.jpg"
+            "image": "/images/menu/tiramisu.jpg"
         }
     ]
 }
