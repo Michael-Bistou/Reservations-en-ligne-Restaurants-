@@ -1,7 +1,7 @@
 {
   "name": "reservationrestaurants",
   "version": "1.0.0",
-  "description": "",
+  "description": "Restaurant Reservation System",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",

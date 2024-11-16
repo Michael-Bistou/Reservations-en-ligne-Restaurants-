@@ -1,5 +1,6 @@
-// Initialize Stripe with your publishable key
-const stripe = Stripe('pk_test_your_publishable_key');
+// Initialize Stripe
+const stripePublicKey = document.querySelector('#stripe-script').getAttribute('data-public-key');
+const stripe = Stripe(stripePublicKey);
 const elements = stripe.elements();
 
 // Create card Element
@@ -40,97 +41,118 @@ const submitButton = document.getElementById('submit-button');
 
 form.addEventListener('submit', async function(event) {
     event.preventDefault();
+    
+    const errorElement = document.getElementById('card-errors');
+    errorElement.textContent = '';
 
-    // Get form data
-    const formData = {
-        restaurant: this.restaurant.value,
-        date: this.date.value,
-        time: this.time.value,
-        guests: this.guests.value,
-        seating: this.seating.value,
-        name: this.name.value,
-        email: this.email.value,
-        phone: this.phone.value,
-        specialRequests: this['special-requests'].value
-    };
-
-    // Validate form first
-    if (!validateForm(formData)) {
-        return;
-    }
-
-    // Update UI to loading state
     submitButton.disabled = true;
     document.getElementById('spinner').classList.remove('hidden');
     document.getElementById('button-text').textContent = 'Processing...';
 
     try {
         // Create payment intent
-        const response = await fetch('/api/create-payment-intent', {
+        const paymentResponse = await fetch('/api/create-payment-intent', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                amount: 2000, // $20.00
-                currency: 'usd',
-                reservation: formData
+                amount: 2000,
+                currency: 'usd'
             })
         });
 
-        const data = await response.json();
-
-        if (data.error) {
-            throw new Error(data.error);
+        if (!paymentResponse.ok) {
+            throw new Error('Payment intent creation failed');
         }
+
+        const paymentData = await paymentResponse.json();
 
         // Confirm card payment
-        const result = await stripe.confirmCardPayment(data.clientSecret, {
-            payment_method: {
-                card: card,
-                billing_details: {
-                    name: formData.name,
-                    email: formData.email,
-                    phone: formData.phone
+        const { error: confirmError, paymentIntent } = await stripe.confirmCardPayment(
+            paymentData.clientSecret,
+            {
+                payment_method: {
+                    card: card,
+                    billing_details: {
+                        name: form.name.value,
+                        email: form.email.value,
+                        phone: form.phone.value
+                    }
                 }
             }
-        });
+        );
 
-        if (result.error) {
-            throw new Error(result.error.message);
+        if (confirmError) {
+            throw new Error(confirmError.message);
         }
 
-        // Payment successful, create reservation
+        // Create reservation
         const reservationResponse = await fetch('/api/create-reservation', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                ...formData,
-                paymentId: result.paymentIntent.id
+                restaurant: form.restaurant.value,
+                date: form.date.value,
+                time: form.time.value,
+                guests: form.guests.value,
+                seating: form.seating.value,
+                name: form.name.value,
+                email: form.email.value,
+                phone: form.phone.value,
+                specialRequests: form['special-requests'].value,
+                paymentIntentId: paymentIntent.id
             })
         });
 
-        const reservationData = await reservationResponse.json();
-
-        if (reservationData.error) {
-            throw new Error(reservationData.error);
+        if (!reservationResponse.ok) {
+            throw new Error('Failed to create reservation');
         }
 
-        // Show confirmation
+        // Show success message
         showConfirmation({
-            ...formData,
-            paymentId: result.paymentIntent.id
+            name: form.name.value,
+            restaurant: form.restaurant.value,
+            date: form.date.value,
+            time: form.time.value,
+            guests: form.guests.value,
+            paymentId: paymentIntent.id
         });
 
     } catch (error) {
-        const errorElement = document.getElementById('card-errors');
+        console.error('Error:', error);
         errorElement.textContent = error.message;
     } finally {
-        // Reset UI state
         submitButton.disabled = false;
         document.getElementById('spinner').classList.add('hidden');
         document.getElementById('button-text').textContent = 'Pay Deposit & Reserve ($20)';
     }
 });
+
+function showConfirmation(data) {
+    const form = document.getElementById('reservation-form');
+    const confirmationDiv = document.getElementById('confirmation-message');
+    
+    form.style.display = 'none';
+    confirmationDiv.style.display = 'block';
+    
+    confirmationDiv.innerHTML = `
+        <div class="confirmation-content">
+            <h2>Reservation Confirmed!</h2>
+            <p>Thank you, ${data.name}!</p>
+            <div class="reservation-details">
+                <h3>Your Reservation Details:</h3>
+                <ul>
+                    <li><strong>Restaurant:</strong> ${data.restaurant}</li>
+                    <li><strong>Date:</strong> ${data.date}</li>
+                    <li><strong>Time:</strong> ${data.time}</li>
+                    <li><strong>Number of Guests:</strong> ${data.guests}</li>
+                    <li><strong>Confirmation ID:</strong> ${data.paymentId}</li>
+                </ul>
+            </div>
+            <p class="confirmation-note">A confirmation email has been sent to your email address.</p>
+        </div>
+    `;
+}

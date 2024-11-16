@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservation Confirmation</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <h1>RestaurantGroup</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#restaurants">Restaurants</a></li>
+                <li><a href="reservations.html">Reservations</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="confirmation-page">
+        <div class="confirmation-container">
+            <div id="loading" class="loading-spinner">
+                <i class="fas fa-spinner fa-spin"></i>
+                <p>Processing your reservation...</p>
+            </div>
+
+            <div id="success" class="confirmation-content" style="display: none;">
+                <i class="fas fa-check-circle success-icon"></i>
+                <h1>Reservation Confirmed!</h1>
+                <div id="reservation-details" class="reservation-details">
+                    <!-- Details will be filled by JavaScript -->
+                </div>
+                <div class="next-steps">
+                    <h2>Next Steps</h2>
+                    <ul>
+                        <li>Check your email for confirmation details</li>
+                        <li>Arrive 10 minutes before your reservation time</li>
+                        <li>Contact us if you need to modify your reservation</li>
+                    </ul>
+                </div>
+                <div class="buttons">
+                    <a href="index.html" class="button">Return to Home</a>
+                    <a href="#" id="calendar-link" class="button">Add to Calendar</a>
+                </div>
+            </div>
+
+            <div id="error" class="error-content" style="display: none;">
+                <i class="fas fa-exclamation-circle error-icon"></i>
+                <h1>Oops! Something went wrong</h1>
+                <p id="error-message"></p>
+                <div class="buttons">
+                    <a href="reservations.html" class="button">Try Again</a>
+                    <a href="index.html#contact" class="button">Contact Support</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-phone"></i> +1 234 567 890</p>
+                    <p><i class="fas fa-envelope"></i> info@restaurantgroup.com</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Follow Us</h3>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/confirmation.js"></script>
+</body>
+</html>

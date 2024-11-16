@@ -876,3 +876,217 @@ select.invalid {
         transform: translateY(0);
     }
 }
+/* Stripe Elements styling */
+.card-element {
+    padding: 12px;
+    border: 1px solid #e6e6e6;
+    border-radius: 4px;
+    background: white;
+    margin-bottom: 16px;
+}
+
+.error {
+    color: #dc3545;
+    font-size: 14px;
+    margin-top: 8px;
+}
+
+.spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: white;
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.hidden {
+    display: none;
+}
+
+/* Confirmation message styling */
+.confirmation-message {
+    background: #f8f9fa;
+    padding: 24px;
+    border-radius: 8px;
+    margin-top: 24px;
+}
+
+.confirmation-message h2 {
+    color: #28a745;
+    margin-bottom: 16px;
+}
+
+.confirmation-message ul {
+    list-style: none;
+    padding: 0;
+}
+
+.confirmation-message li {
+    margin-bottom: 8px;
+    padding: 8px 0;
+    border-bottom: 1px solid #e6e6e6;
+}
+
+/* Payment section styling */
+.payment-section {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 24px;
+}
+
+.payment-options {
+    margin: 16px 0;
+}
+
+.payment-option {
+    padding: 12px;
+    border: 1px solid #e6e6e6;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    background: white;
+}
+
+.payment-option.selected {
+    border-color: #007bff;
+}
+
+.payment-info {
+    font-size: 14px;
+    color: #6c757d;
+    margin-bottom: 16px;
+}
+
+/* Submit button styling */
+.submit-btn {
+    position: relative;
+    width: 100%;
+    padding: 12px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.submit-btn:hover {
+    background: #0056b3;
+}
+
+.submit-btn:disabled {
+    background: #cccccc;
+    cursor: not-allowed;
+}
+/* Confirmation Page Styles */
+.confirmation-page {
+    min-height: 80vh;
+    padding: 40px 20px;
+    background-color: #f9f9f9;
+}
+
+.confirmation-container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: white;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.loading-spinner {
+    text-align: center;
+    padding: 40px;
+}
+
+.loading-spinner i {
+    font-size: 48px;
+    color: #0a6ebd;
+    margin-bottom: 20px;
+}
+
+.success-icon, .error-icon {
+    font-size: 64px;
+    margin-bottom: 20px;
+}
+
+.success-icon {
+    color: #28a745;
+}
+
+.error-icon {
+    color: #dc3545;
+}
+
+.confirmation-content, .error-content {
+    text-align: center;
+}
+
+.reservation-details {
+    margin: 30px 0;
+    text-align: left;
+}
+
+.detail-item {
+    display: flex;
+    align-items: center;
+    margin: 15px 0;
+    font-size: 1.1em;
+}
+
+.detail-item i {
+    margin-right: 15px;
+    color: #0a6ebd;
+    width: 20px;
+}
+
+.next-steps {
+    margin: 30px 0;
+    text-align: left;
+}
+
+.next-steps ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.next-steps li {
+    margin: 10px 0;
+    padding-left: 25px;
+    position: relative;
+}
+
+.next-steps li:before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: #28a745;
+}
+
+.buttons {
+    margin-top: 30px;
+}
+
+.button {
+    display: inline-block;
+    padding: 12px 24px;
+    margin: 0 10px;
+    background-color: #0a6ebd;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.button:hover {
+    background-color: #085494;
+}

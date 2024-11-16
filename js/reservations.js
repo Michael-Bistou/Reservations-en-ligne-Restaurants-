@@ -1,10 +1,15 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize AOS
-    AOS.init({
-        duration: 800,
-        offset: 100,
-        once: true
-    });
+    // Initialize Stripe
+    const stripe = Stripe('pk_test_51PtammRpOPp0fqiuheB0dwsSSwIreBkjk2i5zXNwoKumifqxd94JWaekbR4Jk11WKNm91H3Nz6C1i0YXD7x3Cios00cyNAZNyA'); // Replace with your publishable key
+    let elements;
+    let paymentElement;
+
+    // Form elements
+    const form = document.getElementById('reservation-form');
+    const submitButton = document.getElementById('submit-button');
+    const buttonText = document.getElementById('button-text');
+    const spinner = document.getElementById('spinner');
+    const paymentMessage = document.getElementById('payment-message');
 
     // Initialize Flatpickr for date picker
     flatpickr("#date", {
@@ -34,72 +39,126 @@ document.addEventListener('DOMContentLoaded', function() {
         minuteIncrement: 30
     });
 
-    // Get URL parameters
-    const params = new URLSearchParams(window.location.search);
-    const preselectedRestaurant = params.get('restaurant');
-    
-    if (preselectedRestaurant) {
-        document.getElementById('restaurant').value = preselectedRestaurant;
-    }
-
-    // Form elements
-    const form = document.getElementById('reservation-form');
-    const modal = document.getElementById('confirmation-modal');
-    const closeModal = document.querySelector('.close-modal');
-    const modalBtn = document.querySelector('.modal-btn');
+    // Initialize payment element
+   async function initializePayment() {
+       try {
+           // Show loading state
+           setLoading(true);
+           var test = JSON.stringify({
+            reservationDetails: {
+                restaurant: document.getElementById('restaurant').value,
+                date: document.getElementById('date').value,
+                time: document.getElementById('time').value,
+                guests: document.getElementById('guests').value,
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value
+            }
+        });
+        console.log(test);
+           
+           console.log('Initializing payment...'); // Debug log
+   
+           const response = await fetch('/api/create-payment-intent', {
+               method: 'POST',
+               headers: {
+                   'Content-Type': 'application/json'
+               },
+               body: JSON.stringify({
+                   reservationDetails: {
+                       restaurant: document.getElementById('restaurant').value,
+                       date: document.getElementById('date').value,
+                       time: document.getElementById('time').value,
+                       guests: document.getElementById('guests').value,
+                       name: document.getElementById('name').value,
+                       email: document.getElementById('email').value
+                   }
+               })
+           });
+   
+           console.log('Response status:', response.status); // Debug log
+   
+           if (!response.ok) {
+               const errorData = await response.json();
+               throw new Error(errorData.error || 'Payment initialization failed');
+           }
+   
+           const { clientSecret } = await response.json();
+           console.log('Client secret received'); // Debug log
+   
+           elements = stripe.elements({
+               clientSecret,
+               appearance: {
+                   theme: 'stripe',
+                   variables: {
+                       colorPrimary: '#0a6ebd',
+                   }
+               }
+           });
+   
+           paymentElement = elements.create('payment');
+           await paymentElement.mount('#payment-element');
+           console.log('Payment element mounted'); // Debug log
+   
+       } catch (error) {
+           console.error('Detailed payment initialization error:', error);
+           showMessage('Failed to initialize payment system. Please try again later.', true);
+       } finally {
+           setLoading(false);
+       }
+   }
+   
 
     // Update available time slots based on date and restaurant
-    function updateAvailableTimeSlots(selectedDate) {
+    async function updateAvailableTimeSlots(selectedDate) {
         const restaurant = document.getElementById('restaurant').value;
         if (!restaurant || !selectedDate) return;
 
-        // Simulate API call to get available time slots
-        // In production, this should be a real API call to your backend
-        fetch(`/api/available-times?restaurant=${restaurant}&date=${selectedDate}`)
-            .then(response => response.json())
-            .then(data => {
+        try {
+            const response = await fetch(`/api/available-times?restaurant=${restaurant}&date=${selectedDate}`);
+            const data = await response.json();
+            
+            if (response.ok) {
                 timePicker.set('enable', data.availableSlots);
-            })
-            .catch(error => {
-                console.error('Error fetching available times:', error);
-            });
+            } else {
+                console.error('Error fetching available times:', data.error);
+            }
+        } catch (error) {
+            console.error('Error fetching available times:', error);
+        }
     }
 
-    // Restaurant selection change handler
-    document.getElementById('restaurant').addEventListener('change', function() {
-        const selectedDate = document.getElementById('date').value;
-        if (selectedDate) {
-            updateAvailableTimeSlots(selectedDate);
-        }
-    });
-
-    // Form validation functions
-    function validateForm(data) {
+    // Form validation
+    function validateForm() {
         clearErrors();
         let isValid = true;
+        const formData = new FormData(form);
 
         // Email validation
+        const email = formData.get('email');
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(data.email)) {
+        if (!emailRegex.test(email)) {
             showError('email', 'Please enter a valid email address');
             isValid = false;
         }
 
         // Phone validation
+        const phone = formData.get('phone');
         const phoneRegex = /^\+?[\d\s-]{10,}$/;
-        if (!phoneRegex.test(data.phone)) {
+        if (!phoneRegex.test(phone)) {
             showError('phone', 'Please enter a valid phone number');
             isValid = false;
         }
 
         // Name validation
-        if (data.name.length < 3) {
+        const name = formData.get('name');
+        if (name.length < 3) {
             showError('name', 'Name must be at least 3 characters long');
             isValid = false;
         }
 
-        // Guest number validation for large groups
-        if (data.guests === '7+') {
+        // Guest number validation
+        const guests = formData.get('guests');
+        if (guests === '7+') {
             showError('guests', 'For groups larger than 6, please call us directly');
             isValid = false;
         }
@@ -107,55 +166,77 @@ document.addEventListener('DOMContentLoaded', function() {
         return isValid;
     }
 
+    // Error handling functions
     function showError(fieldId, message) {
         const field = document.getElementById(fieldId);
-        field.classList.add('invalid');
-        
-        const error = document.createElement('div');
-        error.className = 'error';
-        error.textContent = message;
-        
-        field.parentNode.appendChild(error);
+        const errorDiv = document.createElement('div');
+        errorDiv.className = 'error-message';
+        errorDiv.textContent = message;
+        field.parentNode.appendChild(errorDiv);
+        field.classList.add('error');
     }
 
     function clearErrors() {
-        document.querySelectorAll('.error').forEach(error => error.remove());
-        document.querySelectorAll('.invalid').forEach(field => field.classList.remove('invalid'));
+        document.querySelectorAll('.error-message').forEach(el => el.remove());
+        document.querySelectorAll('.error').forEach(el => el.classList.remove('error'));
     }
 
-    function showConfirmation(data) {
-        const restaurantName = document.querySelector(`#restaurant option[value="${data.restaurant}"]`).textContent;
-        const details = document.getElementById('confirmation-details');
-        
-        details.innerHTML = `
-            <p><strong>Restaurant:</strong> ${restaurantName}</p>
-            <p><strong>Date:</strong> ${data.date}</p>
-            <p><strong>Time:</strong> ${data.time}</p>
-            <p><strong>Number of Guests:</strong> ${data.guests}</p>
-            <p><strong>Name:</strong> ${data.name}</p>
-            <p><strong>Email:</strong> ${data.email}</p>
-            <p><strong>Phone:</strong> ${data.phone}</p>
-            ${data.specialRequests ? `<p><strong>Special Requests:</strong> ${data.specialRequests}</p>` : ''}
-            <p><strong>Payment Status:</strong> <span class="success">Confirmed</span></p>
-            <p><strong>Reservation ID:</strong> ${data.paymentId}</p>
-            <p class="confirmation-note">A confirmation email has been sent to your email address.</p>
-        `;
-
-        modal.classList.add('active');
+    function showMessage(messageText, isError = false) {
+        paymentMessage.textContent = messageText;
+        paymentMessage.classList.toggle('error-message', isError);
+        paymentMessage.style.display = 'block';
     }
 
-    // Modal close handlers
-    function closeConfirmation() {
-        modal.classList.remove('active');
-        form.reset();
-        window.location.href = 'index.html'; // Redirect to home page after closing
+    // Handle form submission
+    form.addEventListener('submit', async function(event) {
+        event.preventDefault();
+
+        if (!validateForm()) {
+            return;
+        }
+
+        setLoading(true);
+
+        try {
+            const { error: submitError } = await stripe.confirmPayment({
+                elements,
+                confirmParams: {
+                    return_url: `${window.location.origin}/confirmation.html`,
+                    receipt_email: document.getElementById('email').value,
+                    payment_method_data: {
+                        billing_details: {
+                            name: document.getElementById('name').value,
+                            email: document.getElementById('email').value,
+                            phone: document.getElementById('phone').value
+                        }
+                    }
+                }
+            });
+
+            if (submitError) {
+                showMessage(submitError.message, true);
+            }
+
+        } catch (error) {
+            console.error('Payment error:', error);
+            showMessage('An unexpected error occurred. Please try again.', true);
+        }
+
+        setLoading(false);
+    });
+
+    // Loading state utilities
+    function setLoading(isLoading) {
+        submitButton.disabled = isLoading;
+        spinner.classList.toggle('hidden', !isLoading);
+        buttonText.textContent = isLoading ? 'Processing...' : 'Pay Deposit & Reserve ($20)';
     }
 
-    closeModal.addEventListener('click', closeConfirmation);
-    modalBtn.addEventListener('click', closeConfirmation);
-    modal.addEventListener('click', function(e) {
-        if (e.target === modal) {
-            closeConfirmation();
+    // Restaurant selection change handler
+    document.getElementById('restaurant').addEventListener('change', function() {
+        const selectedDate = document.getElementById('date').value;
+        if (selectedDate) {
+            updateAvailableTimeSlots(selectedDate);
         }
     });
 
@@ -171,8 +252,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Close mobile menu when clicking outside
     document.addEventListener('click', function(e) {
-        if (nav.classList.contains('active') && !e.target.closest('.navbar')) {
+        if (nav && nav.classList.contains('active') && !e.target.closest('.navbar')) {
             nav.classList.remove('active');
         }
     });
+
+    // Initialize payment on page load
+    initializePayment();
 });

@@ -3,12 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Make a Reservation</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <title>Restaurant Reservations</title>
+    
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    
+    <!-- Stripe.js -->
+    <script src="https://js.stripe.com/v3/"></script>
 </head>
 <body>
     <header>
@@ -111,20 +114,9 @@
                     <h3>Reservation Deposit</h3>
                     <p class="payment-info">A $20 deposit is required to secure your reservation. This amount will be deducted from your final bill.</p>
                     
-                    <div class="payment-options">
-                        <div class="payment-option selected">
-                            <input type="radio" name="payment-method" id="card" value="card" checked>
-                            <label for="card">
-                                <i class="fas fa-credit-card"></i>
-                                Credit/Debit Card
-                            </label>
-                        </div>
-                    </div>
-
-                    <div id="card-element" class="card-element">
-                        <!-- Stripe Card Element will be inserted here -->
-                    </div>
-                    <div id="card-errors" class="error" role="alert"></div>
+                    <!-- Stripe Elements will be inserted here -->
+                    <div id="payment-element"></div>
+                    <div id="payment-message" class="payment-message"></div>
                 </div>
 
                 <div class="form-group">
@@ -135,6 +127,10 @@
                 </div>
             </form>
 
+            <!-- Confirmation Message -->
+            <div id="confirmation-message" class="confirmation-message" style="display: none;"></div>
+
+            <!-- Additional Information -->
             <div class="reservation-info">
                 <div class="info-card">
                     <h3><i class="fas fa-clock"></i> Opening Hours</h3>
@@ -178,19 +174,24 @@
         </div>
     </footer>
 
-    <div id="confirmation-modal" class="modal">
-        <div class="modal-content">
-            <span class="close-modal">&times;</span>
-            <h2>Reservation Confirmed!</h2>
-            <div id="confirmation-details"></div>
-            <button class="modal-btn">Close</button>
-        </div>
-    </div>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <script src="https://js.stripe.com/v3/"></script>
     <script src="js/reservations.js"></script>
-    <script src="js/stripe-integration.js"></script>
+    
+    <!-- Initialize date/time pickers -->
+    <script>
+        flatpickr("#date", {
+            minDate: "today",
+            dateFormat: "Y-m-d"
+        });
+
+        flatpickr("#time", {
+            enableTime: true,
+            noCalendar: true,
+            dateFormat: "H:i",
+            minTime: "11:30",
+            maxTime: "22:00"
+        });
+    </script>
 </body>
 </html>
