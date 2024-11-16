@@ -7,7 +7,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <!-- Add Flatpickr for date/time picker -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -107,9 +106,31 @@
                     <textarea id="special-requests" name="special-requests" rows="3"></textarea>
                 </div>
 
+                <!-- Payment Section -->
+                <div class="form-group payment-section">
+                    <h3>Reservation Deposit</h3>
+                    <p class="payment-info">A $20 deposit is required to secure your reservation. This amount will be deducted from your final bill.</p>
+                    
+                    <div class="payment-options">
+                        <div class="payment-option selected">
+                            <input type="radio" name="payment-method" id="card" value="card" checked>
+                            <label for="card">
+                                <i class="fas fa-credit-card"></i>
+                                Credit/Debit Card
+                            </label>
+                        </div>
+                    </div>
+
+                    <div id="card-element" class="card-element">
+                        <!-- Stripe Card Element will be inserted here -->
+                    </div>
+                    <div id="card-errors" class="error" role="alert"></div>
+                </div>
+
                 <div class="form-group">
-                    <button type="submit" class="submit-btn">
-                        Make Reservation <i class="fas fa-arrow-right"></i>
+                    <button type="submit" class="submit-btn" id="submit-button">
+                        <span id="button-text">Pay Deposit & Reserve ($20)</span>
+                        <div id="spinner" class="spinner hidden"></div>
                     </button>
                 </div>
             </form>
@@ -126,6 +147,7 @@
                         <li>Please arrive 10 minutes before your reservation time</li>
                         <li>We hold reservations for 15 minutes</li>
                         <li>For groups larger than 6, please call us directly</li>
+                        <li>Deposit is fully refundable up to 24 hours before reservation</li>
                     </ul>
                 </div>
             </div>
@@ -133,7 +155,27 @@
     </main>
 
     <footer>
-        <!-- Same footer as other pages -->
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-phone"></i> +1 234 567 890</p>
+                    <p><i class="fas fa-envelope"></i> info@restaurantgroup.com</p>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Restaurant Street, City</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Follow Us</h3>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 RestaurantGroup. All rights reserved.</p>
+            </div>
+        </div>
     </footer>
 
     <div id="confirmation-modal" class="modal">
@@ -147,6 +189,8 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://js.stripe.com/v3/"></script>
     <script src="js/reservations.js"></script>
+    <script src="js/stripe-integration.js"></script>
 </body>
 </html>

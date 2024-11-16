@@ -15,18 +15,23 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Disable Sundays and Mondays
                 return (date.getDay() === 0 || date.getDay() === 1);
             }
-        ]
+        ],
+        onChange: function(selectedDates, dateStr) {
+            // Update available time slots based on the selected date
+            updateAvailableTimeSlots(dateStr);
+        }
     });
 
     // Initialize Flatpickr for time picker
-    flatpickr("#time", {
+    const timePicker = flatpickr("#time", {
         enableTime: true,
         noCalendar: true,
         dateFormat: "H:i",
         minTime: "11:30",
         maxTime: "21:30",
         defaultHour: 19,
-        defaultMinute: 0
+        defaultMinute: 0,
+        minuteIncrement: 30
     });
 
     // Get URL parameters
@@ -37,41 +42,40 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('restaurant').value = preselectedRestaurant;
     }
 
-    // Form validation and submission
+    // Form elements
     const form = document.getElementById('reservation-form');
     const modal = document.getElementById('confirmation-modal');
     const closeModal = document.querySelector('.close-modal');
     const modalBtn = document.querySelector('.modal-btn');
 
-    form.addEventListener('submit', function(e) {
-        e.preventDefault();
+    // Update available time slots based on date and restaurant
+    function updateAvailableTimeSlots(selectedDate) {
+        const restaurant = document.getElementById('restaurant').value;
+        if (!restaurant || !selectedDate) return;
 
-        // Get form data
-        const formData = {
-            restaurant: this.restaurant.value,
-            date: this.date.value,
-            time: this.time.value,
-            guests: this.guests.value,
-            seating: this.seating.value,
-            name: this.name.value,
-            email: this.email.value,
-            phone: this.phone.value,
-            specialRequests: this['special-requests'].value
-        };
+        // Simulate API call to get available time slots
+        // In production, this should be a real API call to your backend
+        fetch(`/api/available-times?restaurant=${restaurant}&date=${selectedDate}`)
+            .then(response => response.json())
+            .then(data => {
+                timePicker.set('enable', data.availableSlots);
+            })
+            .catch(error => {
+                console.error('Error fetching available times:', error);
+            });
+    }
 
-        // Validate form data
-        if (!validateForm(formData)) {
-            return;
+    // Restaurant selection change handler
+    document.getElementById('restaurant').addEventListener('change', function() {
+        const selectedDate = document.getElementById('date').value;
+        if (selectedDate) {
+            updateAvailableTimeSlots(selectedDate);
         }
-
-        // Show confirmation
-        showConfirmation(formData);
     });
 
+    // Form validation functions
     function validateForm(data) {
-        // Reset previous errors
         clearErrors();
-
         let isValid = true;
 
         // Email validation
@@ -91,6 +95,12 @@ document.addEventListener('DOMContentLoaded', function() {
         // Name validation
         if (data.name.length < 3) {
             showError('name', 'Name must be at least 3 characters long');
+            isValid = false;
+        }
+
+        // Guest number validation for large groups
+        if (data.guests === '7+') {
+            showError('guests', 'For groups larger than 6, please call us directly');
             isValid = false;
         }
 
@@ -126,6 +136,9 @@ document.addEventListener('DOMContentLoaded', function() {
             <p><strong>Email:</strong> ${data.email}</p>
             <p><strong>Phone:</strong> ${data.phone}</p>
             ${data.specialRequests ? `<p><strong>Special Requests:</strong> ${data.specialRequests}</p>` : ''}
+            <p><strong>Payment Status:</strong> <span class="success">Confirmed</span></p>
+            <p><strong>Reservation ID:</strong> ${data.paymentId}</p>
+            <p class="confirmation-note">A confirmation email has been sent to your email address.</p>
         `;
 
         modal.classList.add('active');
@@ -135,6 +148,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function closeConfirmation() {
         modal.classList.remove('active');
         form.reset();
+        window.location.href = 'index.html'; // Redirect to home page after closing
     }
 
     closeModal.addEventListener('click', closeConfirmation);
