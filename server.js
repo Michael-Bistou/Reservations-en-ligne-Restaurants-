@@ -10,19 +10,19 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(bodyParser.json());
 
-// Serve static files - updated static file serving
+// Serve static files with proper paths
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/js', express.static(path.join(__dirname, 'js')));
 app.use('/css', express.static(path.join(__dirname, 'css')));
 app.use('/images', express.static(path.join(__dirname, 'public/images')));
 
-// Debug middleware
+// Debug middleware to log requests
 app.use((req, res, next) => {
     console.log(`${req.method} ${req.url}`);
     next();
 });
 
-// Route handlers for each page
+// Route handlers for pages
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
@@ -31,12 +31,20 @@ app.get('/menu', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'menu.html'));
 });
 
+app.get('/about', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'about.html'));
+});
+
+app.get('/contact', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'contact.html'));
+});
+
 app.get('/reservations', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'reservations.html'));
 });
 
 // Restaurant data
-let restaurants = {
+const restaurants = {
     italian: {
         name: "La Bella Italia",
         openingHours: { start: "11:00", end: "23:00" },
@@ -65,6 +73,7 @@ app.get('/api/restaurants', (req, res) => {
     });
 });
 
+// Menu data route with error handling
 app.get('/api/menu/:restaurant', (req, res) => {
     const { restaurant } = req.params;
     try {
@@ -81,6 +90,34 @@ app.get('/api/menu/:restaurant', (req, res) => {
     }
 });
 
+// Contact form handling
+app.post('/api/contact', (req, res) => {
+    try {
+        const { name, email, subject, message } = req.body;
+        
+        // Validate form data
+        if (!name || !email || !subject || !message) {
+            return res.status(400).json({
+                status: 'error',
+                message: 'All fields are required'
+            });
+        }
+
+        // Here you would typically send an email or store the message
+        // For now, we'll just send a success response
+        res.json({
+            status: 'success',
+            message: 'Message received successfully'
+        });
+    } catch (error) {
+        res.status(500).json({
+            status: 'error',
+            message: error.message
+        });
+    }
+});
+
+// Reservations routes
 app.get('/api/reservations', (req, res) => {
     res.json({
         status: 'success',
@@ -190,6 +227,7 @@ app.get('*', (req, res) => {
     res.redirect('/');
 });
 
+// Start server
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
     console.log(`Visit http://localhost:${PORT} to view the application`);
