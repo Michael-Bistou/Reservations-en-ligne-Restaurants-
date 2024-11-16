@@ -3,124 +3,163 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Restaurant Group</title>
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>Restaurant Group - Fine Dining Experience</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <header>
-        <nav>
-            <ul>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="/">Restaurant Group</a>
+            </div>
+            <ul class="nav-links">
                 <li><a href="/" class="active">Home</a></li>
-                <li><a href="/menu">Menu</a></li>
-                <li><a href="/about">About</a></li>
-                <li><a href="/contact">Contact</a></li>
+                <li><a href="/restaurants">Our Restaurants</a></li>
                 <li><a href="/reservations">Reservations</a></li>
+                <li><a href="/contact">Contact</a></li>
             </ul>
+            <a href="/book-table" class="cta-button">Book a Table</a>
         </nav>
     </header>
 
     <main>
-        <!-- Hero Section -->
         <section class="hero">
             <div class="hero-content">
-                <h1>Welcome to Our Restaurant Group</h1>
-                <p>Experience three unique culinary journeys under one roof</p>
-                <a href="/reservations" class="cta-button">Make a Reservation</a>
-            </div>
-        </section>
-
-        <!-- Restaurant Showcase Section -->
-        <section class="restaurants-showcase">
-            <div class="container">
-                <h2>Our Restaurants</h2>
-                <div class="restaurant-cards">
-                    <div class="restaurant-card italian">
-                        <div class="card-content">
-                            <h3>La Bella Italia</h3>
-                            <p>Authentic Italian cuisine in an elegant setting</p>
-                            <div class="restaurant-info">
-                                <p><i class="fas fa-clock"></i> 11:00 - 23:00</p>
-                                <p><i class="fas fa-users"></i> Up to 50 guests</p>
-                            </div>
-                            <a href="/menu#italian" class="menu-link">View Menu</a>
-                        </div>
-                    </div>
-
-                    <div class="restaurant-card french">
-                        <div class="card-content">
-                            <h3>Le Petit Bistro</h3>
-                            <p>Classic French dining experience</p>
-                            <div class="restaurant-info">
-                                <p><i class="fas fa-clock"></i> 12:00 - 22:00</p>
-                                <p><i class="fas fa-users"></i> Up to 40 guests</p>
-                            </div>
-                            <a href="/menu#french" class="menu-link">View Menu</a>
-                        </div>
-                    </div>
-
-                    <div class="restaurant-card asian">
-                        <div class="card-content">
-                            <h3>Asian Fusion</h3>
-                            <p>Modern Asian cuisine with traditional flavors</p>
-                            <div class="restaurant-info">
-                                <p><i class="fas fa-clock"></i> 11:30 - 22:30</p>
-                                <p><i class="fas fa-users"></i> Up to 45 guests</p>
-                            </div>
-                            <a href="/menu#asian" class="menu-link">View Menu</a>
-                        </div>
-                    </div>
+                <h1>Welcome to Fine Dining Excellence</h1>
+                <p>Experience culinary masterpieces across our unique restaurants</p>
+                <div class="hero-buttons">
+                    <a href="/reservations" class="primary-button">Make a Reservation</a>
+                    <a href="/menus" class="secondary-button">Explore Our Menus</a>
                 </div>
             </div>
         </section>
 
-        <!-- Features Section -->
-        <section class="features">
-            <div class="container">
-                <div class="feature">
-                    <i class="fas fa-utensils"></i>
-                    <h3>Diverse Cuisine</h3>
-                    <p>Experience three distinct culinary traditions</p>
+        <section class="quick-info">
+            <div class="info-card">
+                <i class="fas fa-clock"></i>
+                <h3>Opening Hours</h3>
+                <p>Mon-Sun: 12:00 - 23:00</p>
+            </div>
+            <div class="info-card">
+                <i class="fas fa-map-marker-alt"></i>
+                <h3>Location</h3>
+                <p>123 Dining Street, City</p>
+            </div>
+            <div class="info-card">
+                <i class="fas fa-phone"></i>
+                <h3>Reservations</h3>
+                <p>+1 234 567 890</p>
+            </div>
+        </section>
+
+        <section class="restaurants">
+            <h2>Our Restaurants</h2>
+            <div class="restaurant-cards">
+                <div class="restaurant-card">
+                    <img src="images/italian-restaurant.jpg" alt="Italian Restaurant">
+                    <div class="card-content">
+                        <h3>La Bella Italia</h3>
+                        <p>Authentic Italian cuisine in an elegant setting</p>
+                        <div class="card-details">
+                            <span><i class="fas fa-utensils"></i> Italian Cuisine</span>
+                            <span><i class="fas fa-star"></i> Fine Dining</span>
+                        </div>
+                        <a href="/restaurants/italian" class="card-button">View Details</a>
+                    </div>
                 </div>
-                <div class="feature">
-                    <i class="fas fa-calendar-alt"></i>
-                    <h3>Easy Reservations</h3>
-                    <p>Book your table online in seconds</p>
+
+                <div class="restaurant-card">
+                    <img src="images/french-restaurant.jpg" alt="French Restaurant">
+                    <div class="card-content">
+                        <h3>Le Petit Bistro</h3>
+                        <p>Classic French dishes with modern flair</p>
+                        <div class="card-details">
+                            <span><i class="fas fa-utensils"></i> French Cuisine</span>
+                            <span><i class="fas fa-star"></i> Fine Dining</span>
+                        </div>
+                        <a href="/restaurants/french" class="card-button">View Details</a>
+                    </div>
                 </div>
-                <div class="feature">
-                    <i class="fas fa-star"></i>
-                    <h3>Premium Service</h3>
-                    <p>Exceptional dining experience guaranteed</p>
+
+                <div class="restaurant-card">
+                    <img src="images/asian-restaurant.jpg" alt="Asian Restaurant">
+                    <div class="card-content">
+                        <h3>Asian Fusion</h3>
+                        <p>Contemporary Asian flavors and traditions</p>
+                        <div class="card-details">
+                            <span><i class="fas fa-utensils"></i> Asian Cuisine</span>
+                            <span><i class="fas fa-star"></i> Modern Dining</span>
+                        </div>
+                        <a href="/restaurants/asian" class="card-button">View Details</a>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Contact Section -->
-        <section class="contact">
-            <div class="container">
-                <h2>Visit Us</h2>
-                <div class="contact-info">
-                    <div>
-                        <i class="fas fa-map-marker-alt"></i>
-                        <p>123 Restaurant Street<br>City, Country</p>
-                    </div>
-                    <div>
-                        <i class="fas fa-phone"></i>
-                        <p>+1 234 567 890</p>
-                    </div>
-                    <div>
-                        <i class="fas fa-envelope"></i>
-                        <p>info@restaurantgroup.com</p>
-                    </div>
+        <section class="events">
+            <h2>Special Events</h2>
+            <div class="events-grid">
+                <div class="event-card">
+                    <i class="fas fa-glass-cheers"></i>
+                    <h3>Private Dining</h3>
+                    <p>Exclusive spaces for intimate gatherings</p>
+                </div>
+                <div class="event-card">
+                    <i class="fas fa-birthday-cake"></i>
+                    <h3>Celebrations</h3>
+                    <p>Make your special day memorable</p>
+                </div>
+                <div class="event-card">
+                    <i class="fas fa-briefcase"></i>
+                    <h3>Corporate Events</h3>
+                    <p>Professional settings for business meetings</p>
+                </div>
+                <div class="event-card">
+                    <i class="fas fa-ring"></i>
+                    <h3>Wedding Reception</h3>
+                    <p>Create lasting memories on your big day</p>
                 </div>
             </div>
+        </section>
+
+        <section class="newsletter">
+            <h2>Stay Updated</h2>
+            <p>Subscribe to our newsletter for special offers and updates</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Enter your email" required>
+                <button type="submit">Subscribe</button>
+            </form>
         </section>
     </main>
 
     <footer>
-        <div class="container">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Contact Us</h4>
+                <p>123 Dining Street, City</p>
+                <p>Phone: +1 234 567 890</p>
+                <p>Email: info@restaurantgroup.com</p>
+            </div>
+            <div class="footer-section">
+                <h4>Opening Hours</h4>
+                <p>Monday - Sunday</p>
+                <p>12:00 - 23:00</p>
+            </div>
+            <div class="footer-section">
+                <h4>Follow Us</h4>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
             <p>&copy; 2024 Restaurant Group. All rights reserved.</p>
         </div>
     </footer>
+
+    <script src="js/main.js"></script>
 </body>
 </html>

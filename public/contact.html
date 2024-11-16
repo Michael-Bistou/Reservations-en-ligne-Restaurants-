@@ -4,76 +4,92 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us - Restaurant Group</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body>
+<body class="contact-page">
     <header>
         <nav>
             <ul>
                 <li><a href="/">Home</a></li>
                 <li><a href="/menu">Menu</a></li>
-                <li><a href="/about">About</a></li>
-                <li><a href="/contact" class="active">Contact</a></li>
                 <li><a href="/reservations">Reservations</a></li>
+                <li><a href="/contact" class="active">Contact</a></li>
             </ul>
         </nav>
     </header>
 
     <main>
-        <section class="page-header">
-            <h1>Contact Us</h1>
+        <section class="contact-hero">
+            <div class="container">
+                <h1>Get in Touch</h1>
+                <p>We'd love to hear from you</p>
+            </div>
         </section>
 
-        <section class="contact-page">
+        <section class="contact-content">
             <div class="container">
                 <div class="contact-grid">
-                    <div class="contact-info">
-                        <h2>Get in Touch</h2>
-                        <div class="info-item">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <div>
-                                <h3>Address</h3>
-                                <p>123 Restaurant Street<br>City, Country</p>
+                    <!-- Contact Information -->
+                    <div class="contact-info-card">
+                        <h2>Contact Information</h2>
+                        <div class="info-items">
+                            <div class="info-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <div>
+                                    <h3>Address</h3>
+                                    <p>123 Restaurant Street<br>City, Country</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="info-item">
-                            <i class="fas fa-phone"></i>
-                            <div>
-                                <h3>Phone</h3>
-                                <p>+1 234 567 890</p>
+                            <div class="info-item">
+                                <i class="fas fa-phone"></i>
+                                <div>
+                                    <h3>Phone</h3>
+                                    <p>+1 234 567 890</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="info-item">
-                            <i class="fas fa-envelope"></i>
-                            <div>
-                                <h3>Email</h3>
-                                <p>info@restaurantgroup.com</p>
+                            <div class="info-item">
+                                <i class="fas fa-envelope"></i>
+                                <div>
+                                    <h3>Email</h3>
+                                    <p>info@restaurantgroup.com</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="info-item">
-                            <i class="fas fa-clock"></i>
-                            <div>
-                                <h3>Hours</h3>
-                                <p>Mon-Sun: 11:00 - 23:00</p>
+                            <div class="info-item">
+                                <i class="fas fa-clock"></i>
+                                <div>
+                                    <h3>Opening Hours</h3>
+                                    <p>Monday - Sunday<br>11:00 AM - 11:00 PM</p>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="contact-form">
+                    <!-- Contact Form -->
+                    <div class="contact-form-card">
                         <h2>Send us a Message</h2>
-                        <form id="contactForm">
+                        <form class="contact-form" action="/submit-contact" method="POST">
                             <div class="form-group">
-                                <label for="name">Name</label>
+                                <label for="name">Full Name</label>
                                 <input type="text" id="name" name="name" required>
                             </div>
                             <div class="form-group">
-                                <label for="email">Email</label>
+                                <label for="email">Email Address</label>
                                 <input type="email" id="email" name="email" required>
                             </div>
                             <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" name="phone">
+                            </div>
+                            <div class="form-group">
                                 <label for="subject">Subject</label>
-                                <input type="text" id="subject" name="subject" required>
+                                <select id="subject" name="subject" required>
+                                    <option value="">Select a subject</option>
+                                    <option value="general">General Inquiry</option>
+                                    <option value="reservation">Reservation Question</option>
+                                    <option value="feedback">Feedback</option>
+                                    <option value="other">Other</option>
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label for="message">Message</label>
@@ -84,12 +100,13 @@
                     </div>
                 </div>
 
+                <!-- Map Section -->
                 <div class="map-section">
                     <h2>Find Us</h2>
                     <div class="map-container">
                         <!-- Replace with your actual map embed code -->
                         <iframe 
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2519.700327595181!2d4.34878!3d50.85045!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zM0LCsDUxJzAxLjYiTiA0wrAyMCc1NS42IkU!5e0!3m2!1sen!2sbe!4v1650000000000!5m2!1sen!2sbe"
+                            src="https://www.google.com/maps/embed?pb=..."
                             width="100%" 
                             height="450" 
                             style="border:0;" 

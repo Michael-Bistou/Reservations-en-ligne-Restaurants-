@@ -1,83 +1,40 @@
 {
-  "restaurant": "Italian Restaurant",
-  "categories": {
-    "appetizers": [
-      {
-        "id": "it-app-1",
-        "name": "Bruschetta",
-        "description": "Grilled bread rubbed with garlic, topped with diced tomatoes, fresh basil, and olive oil",
-        "price": 8.95,
-        "image": "bruschetta.jpg"
-      },
-      {
-        "id": "it-app-2",
-        "name": "Caprese Salad",
-        "description": "Fresh mozzarella, tomatoes, and basil drizzled with balsamic glaze",
-        "price": 10.95,
-        "image": "caprese.jpg"
-      },
-      {
-        "id": "it-app-3",
-        "name": "Calamari Fritti",
-        "description": "Crispy fried squid served with marinara sauce",
-        "price": 12.95,
-        "image": "calamari.jpg"
-      }
+    "starters": [
+        {
+            "name": "Bruschetta",
+            "price": "8.99",
+            "description": "Toasted bread with tomatoes, garlic, and fresh basil",
+            "image": "bruschetta.jpg"
+        },
+        {
+            "name": "Caprese Salad",
+            "price": "10.99",
+            "description": "Fresh mozzarella, tomatoes, and basil with balsamic glaze",
+            "image": "caprese.jpg"
+        }
     ],
-    "mainCourses": [
-      {
-        "id": "it-main-1",
-        "name": "Spaghetti Carbonara",
-        "description": "Classic pasta with pancetta, egg, pecorino cheese, and black pepper",
-        "price": 16.95,
-        "image": "carbonara.jpg"
-      },
-      {
-        "id": "it-main-2",
-        "name": "Margherita Pizza",
-        "description": "Traditional pizza with tomato sauce, fresh mozzarella, and basil",
-        "price": 14.95,
-        "image": "margherita.jpg"
-      },
-      {
-        "id": "it-main-3",
-        "name": "Osso Buco",
-        "description": "Braised veal shanks with gremolata and saffron risotto",
-        "price": 28.95,
-        "image": "ossobuco.jpg"
-      }
+    "mains": [
+        {
+            "name": "Spaghetti Carbonara",
+            "price": "16.99",
+            "description": "Classic pasta with eggs, pecorino cheese, and guanciale",
+            "image": "carbonara.jpg"
+        }
     ],
     "desserts": [
-      {
-        "id": "it-des-1",
-        "name": "Tiramisu",
-        "description": "Classic Italian dessert with coffee-soaked ladyfingers and mascarpone cream",
-        "price": 8.95,
-        "image": "tiramisu.jpg"
-      },
-      {
-        "id": "it-des-2",
-        "name": "Panna Cotta",
-        "description": "Vanilla cream dessert with berry coulis",
-        "price": 7.95,
-        "image": "pannacotta.jpg"
-      }
+        {
+            "name": "Tiramisu",
+            "price": "7.99",
+            "description": "Classic Italian coffee-flavored dessert",
+            "image": "tiramisu.jpg"
+        }
     ],
-    "beverages": [
-      {
-        "id": "it-bev-1",
-        "name": "Italian Red Wine",
-        "description": "House selection of Italian red wine",
-        "price": 7.95,
-        "image": "redwine.jpg"
-      },
-      {
-        "id": "it-bev-2",
-        "name": "Espresso",
-        "description": "Traditional Italian espresso",
-        "price": 3.95,
-        "image": "espresso.jpg"
-      }
+    "drinks": [
+        {
+            "name": "Italian Red Wine",
+            "price": "6.99",
+            "description": "Glass of house red wine",
+            "image": "red-wine.jpg"
+        }
     ]
-  }
 }

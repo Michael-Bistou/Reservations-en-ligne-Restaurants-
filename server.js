@@ -10,6 +10,22 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(bodyParser.json());
 
+// Serve static files from public directory
+app.use(express.static('public'));
+app.use(express.json());
+
+// Specific route for menu data
+app.get('/js/menuData/:restaurant.json', (req, res) => {
+    const restaurant = req.params.restaurant;
+    const allowedRestaurants = ['italian', 'french', 'asian'];
+    
+    if (!allowedRestaurants.includes(restaurant)) {
+        return res.status(404).json({ error: 'Menu not found' });
+    }
+
+    res.sendFile(path.join(__dirname, 'public', 'js', 'menuData', `${restaurant}.json`));
+});
+
 // Serve static files with proper paths
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/js', express.static(path.join(__dirname, 'js')));
