@@ -3,81 +3,142 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us - Restaurant Group</title>
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>About Us - Your Restaurant</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/menu">Menu</a></li>
-                <li><a href="/about" class="active">About</a></li>
-                <li><a href="/contact">Contact</a></li>
-                <li><a href="/reservations">Reservations</a></li>
-            </ul>
-        </nav>
-    </header>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">
+            <h1>Your Restaurant</h1>
+        </div>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/menu">Restaurants</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li><a href="/reservations">Make a Reservation</a></li>
+        </ul>
+    </nav>
 
-    <main>
-        <section class="page-header">
-            <h1>About Us</h1>
+    <main class="about-container">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-content">
+                <h1>Our Story</h1>
+                <p class="subtitle">Experience Culinary Excellence Across Cultures</p>
+            </div>
         </section>
 
-        <section class="about-content">
+        <!-- Mission Statement -->
+        <section class="mission-section">
             <div class="container">
-                <div class="story-section">
-                    <h2>Our Story</h2>
-                    <p>Founded in 2020, our restaurant group brings together three distinct culinary traditions under one roof. We believe in creating exceptional dining experiences that celebrate the diversity of global cuisine.</p>
+                <h2>Our Mission</h2>
+                <div class="mission-content">
+                    <p>At Your Restaurant, we bring together the finest culinary traditions from around the world. Our mission is to create exceptional dining experiences that celebrate diverse cuisines while maintaining the highest standards of quality and service.</p>
                 </div>
+            </div>
+        </section>
 
+        <!-- Restaurants Section -->
+        <section class="restaurants-section">
+            <div class="container">
+                <h2>Our Restaurants</h2>
+                <div class="restaurant-grid">
+                    <div class="restaurant-info">
+                        <h3>La Bella Italia</h3>
+                        <p>Step into the heart of Italy with our authentic Italian restaurant. Our master chefs create dishes that honor traditional recipes while incorporating contemporary touches.</p>
+                        <ul class="restaurant-features">
+                            <li><i class="fas fa-utensils"></i> Traditional Italian Cuisine</li>
+                            <li><i class="fas fa-wine-glass-alt"></i> Extensive Wine Selection</li>
+                            <li><i class="fas fa-clock"></i> Open Daily for Lunch & Dinner</li>
+                        </ul>
+                    </div>
+
+                    <div class="restaurant-info">
+                        <h3>Le Petit Bistro</h3>
+                        <p>Experience the sophistication of French cuisine in our elegant bistro setting. Each dish is crafted with precision and passion, offering a true taste of France.</p>
+                        <ul class="restaurant-features">
+                            <li><i class="fas fa-star"></i> Fine Dining Experience</li>
+                            <li><i class="fas fa-cheese"></i> Curated Cheese Selection</li>
+                            <li><i class="fas fa-glass-cheers"></i> Premium Wine Pairings</li>
+                        </ul>
+                    </div>
+
+                    <div class="restaurant-info">
+                        <h3>Asian Fusion</h3>
+                        <p>Discover the perfect blend of traditional Asian flavors and modern culinary innovation. Our menu showcases the best of Asian cuisine with a contemporary twist.</p>
+                        <ul class="restaurant-features">
+                            <li><i class="fas fa-pepper-hot"></i> Contemporary Asian Cuisine</li>
+                            <li><i class="fas fa-leaf"></i> Fresh Local Ingredients</li>
+                            <li><i class="fas fa-cocktail"></i> Signature Cocktails</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Values Section -->
+        <section class="values-section">
+            <div class="container">
+                <h2>Our Core Values</h2>
                 <div class="values-grid">
+                    <div class="value-card">
+                        <i class="fas fa-award"></i>
+                        <h3>Excellence</h3>
+                        <p>We strive for excellence in every aspect of our service, from food quality to customer experience.</p>
+                    </div>
                     <div class="value-card">
                         <i class="fas fa-heart"></i>
                         <h3>Passion</h3>
-                        <p>We pour our hearts into every dish we serve.</p>
+                        <p>Our passion for food and hospitality drives us to create memorable dining experiences.</p>
                     </div>
                     <div class="value-card">
-                        <i class="fas fa-star"></i>
-                        <h3>Quality</h3>
-                        <p>Only the finest ingredients make it to your plate.</p>
+                        <i class="fas fa-handshake"></i>
+                        <h3>Service</h3>
+                        <p>We're committed to providing exceptional service that exceeds expectations.</p>
                     </div>
                     <div class="value-card">
-                        <i class="fas fa-users"></i>
-                        <h3>Community</h3>
-                        <p>Creating memorable experiences for our guests.</p>
-                    </div>
-                </div>
-
-                <div class="team-section">
-                    <h2>Meet Our Chefs</h2>
-                    <div class="chef-cards">
-                        <div class="chef-card">
-                            <img src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c" alt="Italian Chef">
-                            <h3>Marco Rossi</h3>
-                            <p>Head Chef - La Bella Italia</p>
-                        </div>
-                        <div class="chef-card">
-                            <img src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c" alt="French Chef">
-                            <h3>Jean Pierre</h3>
-                            <p>Head Chef - Le Petit Bistro</p>
-                        </div>
-                        <div class="chef-card">
-                            <img src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c" alt="Asian Chef">
-                            <h3>Liu Wei</h3>
-                            <p>Head Chef - Asian Fusion</p>
-                        </div>
+                        <i class="fas fa-leaf"></i>
+                        <h3>Sustainability</h3>
+                        <p>We prioritize sustainable practices and support local producers whenever possible.</p>
                     </div>
                 </div>
             </div>
         </section>
     </main>
 
+    <!-- Footer -->
     <footer>
-        <div class="container">
-            <p>&copy; 2024 Restaurant Group. All rights reserved.</p>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <p><i class="fas fa-phone"></i> (555) 123-4567</p>
+                <p><i class="fas fa-envelope"></i> info@yourrestaurant.com</p>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Dining Street, Foodville</p>
+            </div>
+            <div class="footer-section">
+                <h3>Hours</h3>
+                <p>Monday - Thursday: 11:30 AM - 10:00 PM</p>
+                <p>Friday - Saturday: 11:30 AM - 11:00 PM</p>
+                <p>Sunday: 12:00 PM - 9:00 PM</p>
+            </div>
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Your Restaurant. All rights reserved.</p>
         </div>
     </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>

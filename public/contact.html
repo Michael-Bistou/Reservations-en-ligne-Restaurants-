@@ -10,11 +10,12 @@
 <body class="contact-page">
     <header>
         <nav>
-            <ul>
+            <ul class="nav-links">
                 <li><a href="/">Home</a></li>
-                <li><a href="/menu">Menu</a></li>
-                <li><a href="/reservations">Reservations</a></li>
-                <li><a href="/contact" class="active">Contact</a></li>
+                <li><a href="/menu">Restaurants</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/contact">Contact</a></li>
+                <li><a href="/reservations">Make a Reservation</a></li>
             </ul>
         </nav>
     </header>
@@ -68,7 +69,9 @@
                     <!-- Contact Form -->
                     <div class="contact-form-card">
                         <h2>Send us a Message</h2>
-                        <form class="contact-form" action="/submit-contact" method="POST">
+                        <!-- Change this line in your contact form -->
+                        <form class="contact-form" action="/api/contact" method="POST">
+                            <!-- Rest of your form remains the same -->
                             <div class="form-group">
                                 <label for="name">Full Name</label>
                                 <input type="text" id="name" name="name" required>
@@ -84,11 +87,11 @@
                             <div class="form-group">
                                 <label for="subject">Subject</label>
                                 <select id="subject" name="subject" required>
-                                    <option value="">Select a subject</option>
-                                    <option value="general">General Inquiry</option>
-                                    <option value="reservation">Reservation Question</option>
-                                    <option value="feedback">Feedback</option>
-                                    <option value="other">Other</option>
+                                <option value="">Select a subject</option>
+                                <option value="general">General Inquiry</option>
+                                <option value="reservation">Reservation Question</option>
+                                <option value="feedback">Feedback</option>
+                                <option value="other">Other</option>
                                 </select>
                             </div>
                             <div class="form-group">
@@ -97,6 +100,7 @@
                             </div>
                             <button type="submit" class="submit-btn">Send Message</button>
                         </form>
+                        
                     </div>
                 </div>
 
@@ -124,5 +128,8 @@
             <p>&copy; 2024 Restaurant Group. All rights reserved.</p>
         </div>
     </footer>
+    
+    <script src="/js/contact.js"></script>
+    
 </body>
 </html>

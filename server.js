@@ -1,5 +1,6 @@
 require('dotenv').config();
 const express = require('express');
+require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const path = require('path');
@@ -297,6 +298,30 @@ app.use((err, req, res, next) => {
         message: 'Something broke!'
     });
 });
+
+// Add this BEFORE the catch-all route
+app.get('/about', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'about.html'));
+});
+
+// Add routes for other pages
+app.get('/menu', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'menu.html'));
+});
+
+app.get('/contact', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'contact.html'));
+});
+
+app.get('/reservations', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'reservations.html'));
+});
+
+// Keep this as the LAST route
+app.get('*', (req, res) => {
+    res.redirect('/');
+});
+
 
 // Catch-all route for any unmatched routes
 app.get('*', (req, res) => {

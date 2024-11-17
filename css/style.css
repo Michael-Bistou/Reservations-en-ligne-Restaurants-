@@ -1262,3 +1262,140 @@ select.invalid {
         font-size: 1rem;
     }
 }
+/* About Page Styles */
+.about-hero {
+    background-color: var(--primary-color);
+    color: var(--white);
+    text-align: center;
+    padding: 6rem 2rem;
+    margin-top: 80px;
+}
+
+.about-hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.about-hero .subtitle {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+.mission-section {
+    padding: 4rem 2rem;
+    background-color: var(--white);
+}
+
+.mission-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    line-height: 1.8;
+}
+
+.restaurants-section {
+    padding: 4rem 2rem;
+    background-color: var(--light-gray);
+}
+
+.restaurant-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.restaurant-card {
+    background: var(--white);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: transform 0.3s ease;
+}
+
+.restaurant-card:hover {
+    transform: translateY(-5px);
+}
+
+.restaurant-content {
+    padding: 2rem;
+}
+
+.restaurant-content h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.restaurant-features {
+    list-style: none;
+    padding: 0;
+    margin-top: 1.5rem;
+}
+
+.restaurant-features li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.restaurant-features i {
+    color: var(--secondary-color);
+    margin-right: 0.5rem;
+}
+
+.values-section {
+    padding: 4rem 2rem;
+    background-color: var(--white);
+}
+
+.values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.value-card {
+    text-align: center;
+    padding: 2rem;
+    background-color: var(--light-gray);
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+.value-card:hover {
+    transform: translateY(-5px);
+}
+
+.value-card i {
+    font-size: 2.5rem;
+    color: var(--secondary-color);
+    margin-bottom: 1rem;
+}
+
+.value-card h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .about-hero h1 {
+        font-size: 2rem;
+    }
+    
+    .about-hero .subtitle {
+        font-size: 1rem;
+    }
+    
+    .restaurant-grid,
+    .values-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .mission-section,
+    .restaurants-section,
+    .values-section {
+        padding: 2rem 1rem;
+    }
+}
