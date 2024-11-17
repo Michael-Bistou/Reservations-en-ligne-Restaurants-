@@ -353,9 +353,11 @@ app.get('/available-times', async (req, res) => {
     }
 });
 // Get payment status endpoint
-app.get('/payment-status/:paymentIntentId', async (req, res) => {
+app.post('/api/payment-status/', async (req, res) => {
+    const paymentId = String(req.body.paymentIntentId);
     try {
-        const { paymentIntentId } = req.params;
+        const { paymentIntentId } = paymentId;
+        console.log('Received payment intent ID:', paymentIntentId);
         const paymentIntent = await stripe.paymentIntents.retrieve(paymentIntentId);
         
         if (paymentIntent.status === 'succeeded') {

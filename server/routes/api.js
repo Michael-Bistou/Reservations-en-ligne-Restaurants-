@@ -106,7 +106,8 @@ router.post('/create-payment-intent', async (req, res) => {
 });
 
 // Get payment status endpoint
-router.get('/payment-status/:paymentIntentId', async (req, res) => {
+router.get('/api/payment-status/', async (req, res) => {
+    console.log("a");
     try {
         const { paymentIntentId } = req.params;
         const paymentIntent = await stripe.paymentIntents.retrieve(paymentIntentId);

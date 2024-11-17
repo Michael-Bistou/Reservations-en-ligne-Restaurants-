@@ -1,5 +1,5 @@
 // Initialize Stripe with your publishable key
-const stripe = Stripe('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX');
+const stripe = Stripe('pk_test_51PtammRpOPp0fqiuheB0dwsSSwIreBkjk2i5zXNwoKumifqxd94JWaekbR4Jk11WKNm91H3Nz6C1i0YXD7x3Cios00cyNAZNyA');
 let elements;
 let paymentElement;
 

@@ -21,9 +21,22 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 async function checkPaymentStatus(paymentIntentId) {
+        //const response = await fetch(`http://localhost:3000/api/payment-status/:${paymentIntentId}`);
+        //const data = await response.json();
+        // Create PaymentIntent on the server
+        const response = await fetch('http://localhost:3000/api/payment-status/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                paymentIntentId: paymentIntentId, // $20.00
+                
+            })
+        }); 
     try {
-        const response = await fetch(`http://localhost:3000/api/check-payment-status/${paymentIntentId}`);
-        const data = await response.json();
+        console.log(response);
+        console.log(data);
 
         if (response.ok) {
             if (data.status === 'succeeded') {

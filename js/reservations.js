@@ -109,14 +109,14 @@ document.addEventListener('DOMContentLoaded', function() {
    
 
     // Update available time slots based on date and restaurant
-    async function updateAvailableTimeSlots(selectedDate) {
+    /* async function updateAvailableTimeSlots(selectedDate) {
         const restaurant = document.getElementById('restaurant').value;
         if (!restaurant || !selectedDate) return;
 
         try {
             const response = await fetch(`/api/available-times?restaurant=${restaurant}&date=${selectedDate}`);
             const data = await response.json();
-            
+            console.log(data);
             if (response.ok) {
                 timePicker.set('enable', data.availableSlots);
             } else {
@@ -125,7 +125,7 @@ document.addEventListener('DOMContentLoaded', function() {
         } catch (error) {
             console.error('Error fetching available times:', error);
         }
-    }
+    } */
 
     // Form validation
     function validateForm() {
