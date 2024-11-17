@@ -4,9 +4,63 @@ const cors = require('cors');
 const path = require('path');
 const mysql = require('mysql2/promise');
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
-const apiRoutes = require('./routes/api');
+const cookieParser = require('cookie-parser');
+const i18next = require('i18next');
+const i18nextMiddleware = require('i18next-http-middleware');
+const Backend = require('i18next-fs-backend');
+const apiRoutes = require('./server/routes/api');
 
 const app = express();
+
+app.use(cookieParser()); // Utiliser cookie-parser pour lire les cookies
+app.use(express.json()); // Pour analyser les requêtes JSON
+app.use(express.urlencoded({ extended: true }));
+
+app.set('view engine', 'ejs'); // On dit à Express d'utiliser EJS comme moteur de templates.
+app.set('views', './views');
+
+// Configurer i18next pour gérer les traductions
+i18next
+  .use(Backend)
+  .use(i18nextMiddleware.LanguageDetector)
+  .init({
+    backend: {
+      loadPath: './locales/{{lng}}.json' // Chemin vers les fichiers de traduction
+    },
+    fallbackLng: 'en', // Langue par défaut
+    preload: ['en', 'fr'] // Langues disponibles
+  });
+
+// Middleware i18next
+app.use(i18nextMiddleware.handle(i18next));
+
+// Utiliser les routes définies dans api.js
+app.use('/api', apiRoutes);
+
+// Autres middlewares et routes de votre application...
+
+// Exemple d'une route principale pour le rendu des pages
+app.get('/', (req, res) => {
+    res.render('index', { t: req.t }); // Utilisation des traductions pour le rendu
+});
+app.get('/about', (req, res) => {
+    res.render('about', { t: req.t });
+});
+app.get('/contact', (req, res) => {
+    res.render('contact', { t: req.t });
+});
+app.get('/menu', (req, res) => {
+    res.render('menu', { t: req.t });
+});
+app.get('/reservations', (req, res) => {
+    res.render('reservations', { t: req.t });
+});
+
+// Démarrer le serveur
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+});
 
 // Database configuration
 const dbConfig = {
@@ -143,9 +197,6 @@ app.use((req, res) => {
     });
 });
 
-// Server initialization
-const PORT = process.env.PORT || 3000;
-
 async function startServer() {
     try {
         // Test database connection
@@ -156,7 +207,6 @@ async function startServer() {
 
         // Start server
         app.listen(PORT, () => {
-            console.log(`Server running on port ${PORT}`);
             console.log('Environment:', process.env.NODE_ENV);
             console.log('Database:', process.env.DB_NAME);
             console.log('Stripe configuration:', process.env.STRIPE_SECRET_KEY ? 'Present' : 'Missing');

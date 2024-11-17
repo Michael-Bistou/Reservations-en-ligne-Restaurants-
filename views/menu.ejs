@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="<%= req.language %>">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= t('header.home') %></title>
+</head>
+<body>
+    <nav class="navbar">
+        <%- include('partials/language-selector') %> <!-- Inclure le sélecteur de langue -->
+    </nav>
+    <h1><%= t('hero.title') %></h1>
+    <p><%= t('hero.subtitle') %></p>
+    <a href="#featured-restaurants" class="cta-button"><%= t('hero.view_restaurants') %></a>
+    <a href="/reservations" class="cta-button secondary"><%= t('hero.book_table') %></a>
+</body>
+</html>

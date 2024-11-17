@@ -130,6 +130,7 @@ class Reservation {
             throw new Error(`Error updating reservation status: ${error.message}`);
         }
     }
+    
 
     // Get reservations by email
     static async getByEmail(email) {
@@ -143,6 +144,7 @@ class Reservation {
             throw new Error(`Error getting reservations by email: ${error.message}`);
         }
     }
+    
 
     // Cancel reservation
     static async cancel(id) {

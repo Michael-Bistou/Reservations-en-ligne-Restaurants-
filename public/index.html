@@ -27,6 +27,10 @@
                 <div class="line2"></div>
                 <div class="line3"></div>
             </div>
+            <div class="language-selector">
+                <button onclick="changeLanguage('en')">EN</button>
+                <button onclick="changeLanguage('fr')">FR</button>
+            </div>
         </nav>
 
         <div class="hero">
@@ -89,7 +93,27 @@
         </div>
     </footer>
 
+    <script>
+        function changeLanguage(language) {
+            fetch('/change-language', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ lng: language })
+            })
+            .then(() => {
+                location.reload(); // Recharge la page pour appliquer la langue choisie
+            });
+        }
+    </script>
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <script src="js/script.js"></script>
+    <script src="https://unpkg.com/i18next@latest"></script>
+    <script src="https://unpkg.com/i18next-http-backend@latest"></script>
+    <script src="https://unpkg.com/i18next-browser-languagedetector@latest"></script>
+    <script src="https://unpkg.com/jquery@latest"></script>
+    <script src="https://unpkg.com/jquery-i18next@latest"></script>
 </body>
 </html>

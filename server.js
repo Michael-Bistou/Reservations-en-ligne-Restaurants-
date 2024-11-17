@@ -9,6 +9,24 @@ const app = express();
 const Reservation = require('./server/models/reservation.js');
 const nodemailer = require('nodemailer');
 const PORT = process.env.PORT || 3000;
+const i18next = require('i18next');
+const i18nextMiddleware = require('i18next-http-middleware');
+const Backend = require('i18next-fs-backend');
+
+i18next
+  .use(Backend)
+  .use(i18nextMiddleware.LanguageDetector)
+  .init({
+      backend: {
+          loadPath: './locales/{{lng}}.json' // Chemin vers les fichiers de traduction
+      },
+      fallbackLng: 'en', // Langue par défaut
+      preload: ['en', 'fr'] // Langues disponibles
+  });
+
+app.use(i18nextMiddleware.handle(i18next));
+
+
 
 
 // Email transporter configuration

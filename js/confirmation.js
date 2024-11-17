@@ -21,39 +21,43 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 async function checkPaymentStatus(paymentIntentId) {
-        //const response = await fetch(`http://localhost:3000/api/payment-status/:${paymentIntentId}`);
-        //const data = await response.json();
-        // Create PaymentIntent on the server
+    try {
+        // Créer la requête au serveur pour vérifier le statut de paiement
         const response = await fetch('http://localhost:3000/api/payment-status/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                paymentIntentId: paymentIntentId, // $20.00
-                
+                paymentIntentId: paymentIntentId
             })
-        }); 
-    try {
-        console.log(response);
-        console.log(data);
+        });
 
-        if (response.ok) {
-            if (data.status === 'succeeded') {
-                showSuccess(data.reservation);
-                // Send confirmation email
-                sendConfirmationEmail(data.reservation);
-            } else {
-                showError('Payment was not successful. Please try again.');
-            }
+        // Vérifiez si la réponse est correcte
+        if (!response.ok) {
+            throw new Error('Erreur lors de la vérification du statut de paiement');
+        }
+
+        // Extraire les données de la réponse en JSON
+        const data = await response.json(); 
+
+        // Log de débogage
+        console.log('Réponse du serveur:', data);
+
+        // Vérifier le statut de paiement
+        if (data.status === 'succeeded') {
+            showSuccess(data.reservation);
+            // Envoyer un email de confirmation
+            sendConfirmationEmail(data.reservation);
         } else {
-            throw new Error(data.error || 'Failed to verify payment status');
+            showError('Le paiement n\'a pas pu être validé. Veuillez essayer à nouveau.');
         }
     } catch (error) {
-        console.error('Error:', error);
-        showError('Error verifying payment. Please contact support.');
+        console.error('Erreur lors de la vérification du paiement :', error);
+        showError('Oops! Something went wrong. Please contact support.');
     }
 }
+
 
 function showSuccess(reservation) {
     document.getElementById('loading').style.display = 'none';

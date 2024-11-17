@@ -1,0 +1,29 @@
+<div class="language-selector">
+    <button onclick="changeLanguage('en')">EN</button>
+    <button onclick="changeLanguage('fr')">FR</button>
+</div>
+<script>
+    function changeLanguage(language) {
+        fetch('/api/change-language', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ lng: language })
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erreur lors du changement de langue');
+            }
+            return response.text();
+        })
+        .then(() => {
+            console.log('Changement de langue réussi');
+            location.reload(); // Recharge la page pour appliquer la langue choisie
+        })
+        .catch(error => {
+            console.error('Erreur:', error);
+        });
+    }
+</script>
+

@@ -21,6 +21,10 @@
                 <li><a href="/reservations">Make a Reservation</a></li>
             </ul>
         </nav>
+        <div class="language-selector">
+            <button onclick="changeLanguage('en')">EN</button>
+            <button onclick="changeLanguage('fr')">FR</button>
+        </div>
     </header>
 
     <main class="confirmation-page">
@@ -83,5 +87,11 @@
     </footer>
 
     <script src="js/confirmation.js"></script>
+    <script src="https://unpkg.com/i18next@latest"></script>
+    <script src="https://unpkg.com/i18next-http-backend@latest"></script>
+    <script src="https://unpkg.com/i18next-browser-languagedetector@latest"></script>
+    <script src="https://unpkg.com/jquery@latest"></script>
+    <script src="https://unpkg.com/jquery-i18next@latest"></script>
+
 </body>
 </html>

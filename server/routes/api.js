@@ -4,6 +4,13 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const Reservation = require('../models/reservation');
 const nodemailer = require('nodemailer');
 
+router.post('/change-language', (req, res) => {
+    const { lng } = req.body;
+    console.log('Changement de langue demandé:', lng);  // Ajoutez ce log pour vérifier
+    res.cookie('i18next', lng); // Utilise un cookie pour enregistrer la langue choisie par l'utilisateur
+    res.status(200).send('Language changed');
+});
+
 // Email transporter configuration
 const transporter = nodemailer.createTransport({
     host: process.env.SMTP_HOST,
@@ -106,41 +113,28 @@ router.post('/create-payment-intent', async (req, res) => {
 });
 
 // Get payment status endpoint
-router.get('/api/payment-status/', async (req, res) => {
-    console.log("a");
+router.post('/payment-status', async (req, res) => {
+    const { paymentIntentId } = req.body;
+
+    if (!paymentIntentId) {
+        return res.status(400).json({ error: 'Missing paymentIntentId' });
+    }
+
     try {
-        const { paymentIntentId } = req.params;
+        // Récupération du PaymentIntent à partir de Stripe
         const paymentIntent = await stripe.paymentIntents.retrieve(paymentIntentId);
-        
+
         if (paymentIntent.status === 'succeeded') {
-            // Find associated reservation
-            const reservation = await Reservation.findOne({ paymentIntentId });
-            
-            if (reservation) {
-                res.json({
-                    success: true,
-                    reservation
-                });
-            } else {
-                res.status(404).json({
-                    success: false,
-                    error: 'Reservation not found'
-                });
-            }
+            res.status(200).json({ status: 'succeeded', reservation: paymentIntent.metadata });
         } else {
-            res.json({
-                success: false,
-                error: 'Payment not completed'
-            });
+            res.status(200).json({ status: paymentIntent.status });
         }
     } catch (error) {
-        console.error('Error checking payment status:', error);
-        res.status(500).json({
-            success: false,
-            error: 'Failed to check payment status'
-        });
+        console.error('Erreur lors de la récupération du statut du paiement:', error);
+        res.status(500).json({ error: 'Erreur lors de la récupération du statut du paiement' });
     }
 });
+
 
 // Create Reservation endpoint
 router.post('/create-reservation', async (req, res) => {
@@ -264,5 +258,7 @@ router.get('/verify-payment/:paymentIntentId', async (req, res) => {
         });
     }
 });
+
+
 
 module.exports = router;

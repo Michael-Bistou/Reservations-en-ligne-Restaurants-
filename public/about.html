@@ -21,6 +21,10 @@
             <li><a href="/contact">Contact</a></li>
             <li><a href="/reservations">Make a Reservation</a></li>
         </ul>
+        <div class="language-selector">
+            <button onclick="changeLanguage('en')">EN</button>
+            <button onclick="changeLanguage('fr')">FR</button>
+        </div>
     </nav>
 
     <main class="about-container">
@@ -140,5 +144,11 @@
     </footer>
 
     <script src="script.js"></script>
+    <script src="https://unpkg.com/i18next@latest"></script>
+    <script src="https://unpkg.com/i18next-http-backend@latest"></script>
+    <script src="https://unpkg.com/i18next-browser-languagedetector@latest"></script>
+    <script src="https://unpkg.com/jquery@latest"></script>
+    <script src="https://unpkg.com/jquery-i18next@latest"></script>
+
 </body>
 </html>
