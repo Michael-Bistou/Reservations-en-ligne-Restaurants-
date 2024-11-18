@@ -12,6 +12,9 @@ const apiRoutes = require('./server/routes/api');
 
 const app = express();
 
+// Serve static files
+app.use(express.static('public'));
+
 app.use(cookieParser()); // Utiliser cookie-parser pour lire les cookies
 app.use(express.json()); // Pour analyser les requêtes JSON
 app.use(express.urlencoded({ extended: true }));
@@ -25,21 +28,24 @@ i18next
   .use(i18nextMiddleware.LanguageDetector)
   .init({
     backend: {
-      loadPath: './locales/{{lng}}.json' // Chemin vers les fichiers de traduction
+      loadPath: './locales/fr.json' // Chemin vers les fichiers de traduction
     },
     fallbackLng: 'en', // Langue par défaut
-    preload: ['en', 'fr'] // Langues disponibles
+    preload: ['en', 'fr'], // Langues disponibles
+    detection: {
+      order: ['cookie', 'querystring', 'header'], // Prend la langue à partir du cookie, puis de la query string, puis des headers
+      caches: ['cookie'] // Stocke la langue choisie dans un cookie
+    }
   });
+
 
 // Middleware i18next
 app.use(i18nextMiddleware.handle(i18next));
 
 // Utiliser les routes définies dans api.js
-app.use('/api', apiRoutes);
+app.use('/api.js', apiRoutes);
+console.log('Langue détectée:', req.language);
 
-// Autres middlewares et routes de votre application...
-
-// Exemple d'une route principale pour le rendu des pages
 app.get('/', (req, res) => {
     res.render('index', { t: req.t }); // Utilisation des traductions pour le rendu
 });
@@ -88,6 +94,8 @@ async function testDatabaseConnection() {
     }
 }
 
+testDatabaseConnection();
+
 // Middleware
 app.use(cors({
     origin: process.env.NODE_ENV === 'production' 
@@ -104,8 +112,6 @@ app.use(cors({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Serve static files
-app.use(express.static(path.join(__dirname, 'public')));
 
 // Make database pool available in all routes
 app.use((req, res, next) => {
@@ -155,8 +161,10 @@ app.get('/health', (req, res) => {
 });
 
 // Error handling middleware
-app.use((err, req, res, next) => {
-    console.error('Server Error:', err);
+    app.use((err, req, res, next) => {
+        console.error(err.stack);
+        res.status(500).send('Something broke!');
+    
     
     // Handle Stripe errors
     if (err.type === 'StripeError') {

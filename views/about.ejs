@@ -3,15 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= t('header.home') %></title>
+    <title><%= t('header.about') %></title>
+    <link rel="stylesheet" href="/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
-    <nav class="navbar">
-        <%- include('partials/language-selector') %> <!-- Inclure le sélecteur de langue -->
+    <nav>
+        <div class="logo">
+            <h1>Your Restaurant</h1>
+        </div>
+        <ul class="nav-links">
+            <li><a href="/" title="<%= t('header.home') %>"><%= t('header.home') %></a></li>
+            <li><a href="/menu" title="<%= t('header.restaurants') %>"><%= t('header.restaurants') %></a></li>
+            <li><a href="/about" title="<%= t('header.about') %>"><%= t('header.about') %></a></li>
+            <li><a href="/contact" title="<%= t('header.contact') %>"><%= t('header.contact') %></a></li>
+            <li><a href="/reservations" title="<%= t('header.reservation') %>"><%= t('header.reservation') %></a></li>
+        </ul>
+        <div class="language-selector">
+            <button onclick="changeLanguage('en')">EN</button>
+            <button onclick="changeLanguage('fr')">FR</button>
+        </div>
     </nav>
-    <h1><%= t('hero.title') %></h1>
-    <p><%= t('hero.subtitle') %></p>
-    <a href="#featured-restaurants" class="cta-button"><%= t('hero.view_restaurants') %></a>
-    <a href="/reservations" class="cta-button secondary"><%= t('hero.book_table') %></a>
+
+    <main class="about-container">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-content">
+                <h1><%= t('about.story') %></h1>
+                <p class="subtitle"><%= t('about.subtitle') %></p>
+            </div>
+        </section>
+
+        <!-- Mission Statement -->
+        <section class="mission-section">
+            <div class="container">
+                <h2><%= t('about.mission_title') %></h2>
+                <div class="mission-content">
+                    <p><%= t('about.mission') %></p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3><%= t('footer.contact') %></h3>
+                <p><i class="fas fa-phone"></i> +1 234 567 890</p>
+                <p><i class="fas fa-envelope"></i> info@yourrestaurant.com</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="/js/script.js"></script> <!-- Ce script doit être chargé correctement -->
 </body>
 </html>

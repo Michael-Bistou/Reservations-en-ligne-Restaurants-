@@ -397,15 +397,16 @@ app.get('/available-times', async (req, res) => {
 });
 // Get payment status endpoint
 app.post('/api/payment-status/', async (req, res) => {
-    const paymentId = String(req.body.paymentIntentId);
+    const paymentId = JSON.stringify(req.body.paymentIntentId);
+    console.log(paymentId);
     try {
-        const { paymentIntentId } = paymentId;
+        const  paymentIntentId  = "pi_3QMUlbRpOPp0fqiu1qm5sIat";
         console.log('Received payment intent ID:', paymentIntentId);
         const paymentIntent = await stripe.paymentIntents.retrieve(paymentIntentId);
         
         if (paymentIntent.status === 'succeeded') {
             // Find associated reservation
-            const reservation = await Reservation.findOne({ paymentIntentId });
+            const reservation = await Reservation({ paymentIntentId });
             
             if (reservation) {
                 res.json({
@@ -433,7 +434,12 @@ app.post('/api/payment-status/', async (req, res) => {
     }
 });
 
-
+app.post('/api/change-language', (req, res) => {
+    const { lng } = req.body;
+    console.log('Changement de langue demandé:', lng);  // Ajoutez ce log pour vérifier
+    res.cookie('i18next', lng); // Utilise un cookie pour enregistrer la langue choisie par l'utilisateur    
+    res.status(200).send('Language changed');
+});
 
 // Create Reservation endpoint
 app.post('/create-reservation', async (req, res) => {

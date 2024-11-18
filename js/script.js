@@ -117,6 +117,20 @@ document.addEventListener('DOMContentLoaded', function() {
         `;
     }
 
+    function changeLanguage(language) {
+        fetch('/api/change-language', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ lng: language })
+        })
+        .then(() => {
+            location.reload(); // Recharge la page pour appliquer la langue choisie
+        });
+    }
+    
+
     // Close mobile menu when clicking outside
     document.addEventListener('click', function(e) {
         if (nav.classList.contains('active') && !e.target.closest('.navbar')) {
@@ -143,3 +157,4 @@ document.addEventListener('DOMContentLoaded', function() {
     // Load restaurant data when the page loads
     loadRestaurantData();
 });
+

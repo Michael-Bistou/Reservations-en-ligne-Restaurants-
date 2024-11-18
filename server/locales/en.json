@@ -1,0 +1,25 @@
+{
+    "header": {
+      "home": "Home",
+      "about": "About",
+      "restaurants": "Restaurants",
+      "contact": "Contact",
+      "reservation": "Reservation"
+    },
+    "hero": {
+      "title": "Welcome to Our Restaurants",
+      "subtitle": "Experience culinary excellence across three unique venues",
+      "view_restaurants": "View Restaurants",
+      "book_table": "Book a Table"
+    },
+    "about": {
+      "story": "Our Story",
+      "subtitle": "Discover our journey",
+      "mission_title": "Our Mission",
+      "mission": "Our mission is to provide the best culinary experiences."
+    },
+    "footer": {
+      "contact": "Contact Us"
+    }
+  }
+  

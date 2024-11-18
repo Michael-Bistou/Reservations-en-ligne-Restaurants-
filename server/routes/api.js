@@ -4,12 +4,7 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const Reservation = require('../models/reservation');
 const nodemailer = require('nodemailer');
 
-router.post('/change-language', (req, res) => {
-    const { lng } = req.body;
-    console.log('Changement de langue demandé:', lng);  // Ajoutez ce log pour vérifier
-    res.cookie('i18next', lng); // Utilise un cookie pour enregistrer la langue choisie par l'utilisateur
-    res.status(200).send('Language changed');
-});
+
 
 // Email transporter configuration
 const transporter = nodemailer.createTransport({

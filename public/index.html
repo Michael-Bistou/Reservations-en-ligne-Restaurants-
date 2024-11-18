@@ -95,7 +95,7 @@
 
     <script>
         function changeLanguage(language) {
-            fetch('/change-language', {
+            fetch('/api/change-language', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -110,10 +110,6 @@
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <script src="js/script.js"></script>
-    <script src="https://unpkg.com/i18next@latest"></script>
-    <script src="https://unpkg.com/i18next-http-backend@latest"></script>
-    <script src="https://unpkg.com/i18next-browser-languagedetector@latest"></script>
-    <script src="https://unpkg.com/jquery@latest"></script>
-    <script src="https://unpkg.com/jquery-i18next@latest"></script>
+    
 </body>
 </html>
